@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Meu Transporte</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <header>
+        <img src="imagens do menu/logo.jpeg" alt="Meu Transporte">
+        <div class="search-bar">
+            <input type="text" placeholder="Pesquisar...">
+        </div>
+    </header>
+
+    <main>
+        <div class="login-form">
+            <h2>Login</h2>
+            <form>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit" formaction="Menu.html">Entrar</button>
+                <a href="#">Esqueceu sua senha?</a>
+            </form>
+        </div>
+        
+
+        <div class="captcha">
+            <label for="captcha">Digite o código abaixo:</label>
+            <div class="captcha-image">
+                <img src="imagens do menu/codigoveri.png" alt="Código de verificação">
+            </div>
+            <input type="text" id="captcha" name="captcha" required>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2023 Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
