@@ -1,9 +1,29 @@
 // script.js
 document.addEventListener('DOMContentLoaded', function () {
+    const jsonData = {
+        "loginForm": {
+            "ids": {
+                "emailInput": "email",
+                "passwordInput": "password",
+                "captchaInput": "captcha"
+            },
+            "errorMessages": {
+                "emptyFields": "Por favor, preencha todos os campos.",
+                "incorrectCaptcha": "O código CAPTCHA está incorreto. Tente novamente."
+            },
+            "navigation": {
+                "menuPage": "Menu.html"
+            }
+        }
+    };
+
+    localStorage.setItem('loginFormData', JSON.stringify(jsonData));
+    const data = JSON.parse(localStorage.getItem('loginFormData'));
+
     const loginForm = document.querySelector('.login-form form');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const captchaInput = document.getElementById('captcha');
+    const emailInput = document.getElementById(data.loginForm.ids.emailInput);
+    const passwordInput = document.getElementById(data.loginForm.ids.passwordInput);
+    const captchaInput = document.getElementById(data.loginForm.ids.captchaInput);
     const captchaImage = document.querySelector('.captcha-image img');
     const errorMessage = document.createElement('div');
     errorMessage.style.display = 'none';
@@ -21,15 +41,17 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
 
         if (emailInput.value === '' || passwordInput.value === '' || captchaInput.value === '') {
-            errorMessage.textContent = 'Por favor, preencha todos os campos.';
+            errorMessage.textContent = data.loginForm.errorMessages.emptyFields;
             errorMessage.style.display = 'block';
         } else if (captchaInput.value !== captchaImage.getAttribute('alt')) {
-            errorMessage.textContent = 'O código CAPTCHA está incorreto. Tente novamente.';
+            errorMessage.textContent = data.loginForm.errorMessages.incorrectCaptcha;
             errorMessage.style.display = 'block';
             generateCaptcha();
         } else {
             errorMessage.style.display = 'none';
-            window.location.href = 'Menu.html';
+            localStorage.setItem('email', emailInput.value);
+            localStorage.setItem('password', passwordInput.value);
+            window.location.href = data.loginForm.navigation.menuPage;
         }
     });
 

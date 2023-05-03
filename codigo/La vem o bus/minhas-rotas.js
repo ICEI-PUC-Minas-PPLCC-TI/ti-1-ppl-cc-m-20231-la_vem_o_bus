@@ -3,10 +3,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const map = L.map('map').setView([-19.920830, -43.937780], 14); // Coordenadas de Belo Horizonte e zoom inicial
 
     // Adicione uma camada de mapa (tiles) ao mapa
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
-
     // Substitua 'YOUR_API_KEY' pela sua chave de API do OpenRouteService
     const orsKey = '5b3ce3597851110001cf624862e8cd6327b04ab3902533c08464a987';
 
@@ -28,51 +27,75 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
 
-    // Defina as coordenadas das rotas
-    const startPoint1 = [-19.91083332522026, -43.90513648605128];
-    const endPoint1 = [-19.926103152843456, -43.930969993042105];
-    const startPoint11 = [-19.917577503598082, -43.926531283811855];
-    const endPoint11 = [-19.92613525959305, -43.9253860993067];
-    const startPoint12 = [-19.91242162450274, -43.90449527735016]; //leopoldo gomes
-    const endPoint12 = [-19.917408044061244, -43.926413315297225]; // hermilo alves
-    const startPoint13 = [-19.92609059249397, -43.93093242348241]; 
-    const endPoint13 = [-19.924080719924657, -43.95300394391276]; 
-
-    const startPoint2 = [-19.91083332522026, -43.90513648605128];
-    const endPoint2 = [-19.933287406764244, -43.93711621673579];
+    // Defina as coordenadas das rotas 1
+    const startPoint1 = [  -19.911227869979335, -43.90658445584676];
+    const endPoint1 = [ -19.92616935424791, -43.92535672647641];
+    //
    
+    //
+
+    //
+ 
+// Defina as coordenadas das rotas 2
+
+    const startPoint2 = [-19.911227869979335, -43.90658445584676]; 
+    const endPoint2 = [ -19.92715468975374, -43.91912887859965];
+    const startPoint21 = [-19.92715468975374, -43.91912887859965]; 
+    const endPoint21 = [-19.92616935424791, -43.92535672647641 ]; 
+  
+    
+   // rota 3
+
+   const startPoint3 = [-19.911731189194775, -43.922909533271245]; 
+   const endPoint3 = [-19.930177648772037, -43.93259828161054 ]; 
+   const startPoint31 = [-19.930177648772037, -43.93259828161054]; 
+   const endPoint31 = [-19.926349833347718, -43.91192695079002]; 
+    
+
+
+   const route3Coordinates = await busroute(startPoint3, endPoint3);
+   const route31Coordinates = await busroute(startPoint31, endPoint31);
+  
+
+  // end rota 3 
 
     // Obtenha e adicione rotas a pé seguindo as ruas ao mapa
     const route1Coordinates = await busroute(startPoint1, endPoint1);
+  
+
+    
+
     const route2Coordinates = await busroute(startPoint2, endPoint2);
 
-    const route11coordinates = await busroute(startPoint11, endPoint11);
-    const route12coordinates = await busroute(startPoint12, endPoint12);
-    const route13coordinates = await busroute(startPoint13, endPoint13);
-                              
+    const route21Coordinates = await busroute(startPoint21, endPoint21);
+    
+
+    // rota 1
+   /*                             
     if (route1Coordinates) {
         L.polyline(route1Coordinates, { color: 'blue' }).addTo(map);
     }
     
-    if (route11coordinates) { // Verifique se as coordenadas da terceira rota estão disponíveis
-        L.polyline(route11coordinates, { color: 'blue' }).addTo(map); 
-    }
-    if (route12coordinates) { // Verifique se as coordenadas da terceira rota estão disponíveis
-        L.polyline(route12coordinates, { color: 'blue' }).addTo(map); 
-    }
-    if (route13coordinates) {
-        L.polyline(route13coordinates, { color: 'blue' }).addTo(map);
-    }
+    
 
-    if (route2Coordinates) {
+    // rota 2
+
+   /* if (route2Coordinates) {
         L.polyline(route2Coordinates, { color: 'red' }).addTo(map);
     }
+    if (route21Coordinates) {
+        L.polyline(route21Coordinates, { color: 'orange' }).addTo(map);
+    }    
 
-   
+// rota 3  
+if (route3Coordinates) {
+    L.polyline(route3Coordinates, { color: 'purple' }).addTo(map);
+}  
+if (route31Coordinates) {
+    L.polyline(route31Coordinates, { color: 'purple' }).addTo(map);
+}  
 
-
-
-
+*/
 
 
 

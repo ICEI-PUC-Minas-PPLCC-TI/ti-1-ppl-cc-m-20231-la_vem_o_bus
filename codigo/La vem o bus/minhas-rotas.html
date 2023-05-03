@@ -8,6 +8,7 @@
     <script src="minhas-rotas.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.GeometryUtil/0.7.0/leaflet.geometryutil.min.js"></script>
    
+   
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
     <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.min.js"></script>
   
@@ -38,6 +39,7 @@
             <button id="addRoute">Adicionar Rota</button>
             <button id="mergeRoutes">Mesclar Rotas</button>
             <button id="saveRoute">Salvar Rota</button>
+            <button id="getLocationInfo">Obter informações da localização</button>
 
             
         </section>
@@ -50,13 +52,9 @@
         <p>&copy; 2023 - Todos os direitos reservados</p>
     </footer>
 
-    <script>
-        const backToMenuBtn = document.querySelector("#backToMenu");
-
-        backToMenuBtn.addEventListener("click", () => {
-            window.location.href = "Menu.html";
-        });
-    </script>
+    
+      
+    
 </body>
 </html>
 
