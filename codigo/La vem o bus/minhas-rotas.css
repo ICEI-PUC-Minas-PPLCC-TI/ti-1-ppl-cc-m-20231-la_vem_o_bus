@@ -157,6 +157,72 @@ button:hover {
   border-radius: 5px;
 }
 
+.delete-route-button {
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+.delete-route-button:hover {
+  background-color: rgb(215, 15, 15);
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+/* estilo da input de cor */
+
+
+/* Estilos para o input de cor da rota de ônibus */
+label[for="busRouteColor"] {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+input[type="color"]#busRouteColor {
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+}
+
+input[type="color"]#busRouteColor:focus {
+  border-color: #66afe9;
+  box-shadow: 0 0 3px rgba(102, 175, 233, 0.6);
+}
+/* Estilos para a seção de escolha de cor */
+.color-selection {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  padding: 10px;
+  display: inline-block;
+  margin: 10px 0;
+  
+}
+
+.color-selection label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.color-selection p {
+  margin: 5px 0;
+}
+
+
+
+
+
+
 /* Rodapé */
 footer {
   background-color: #343a40;

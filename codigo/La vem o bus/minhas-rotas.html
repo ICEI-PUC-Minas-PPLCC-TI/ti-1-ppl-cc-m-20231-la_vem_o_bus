@@ -36,13 +36,16 @@
         <div id="map"></div>
         <section id="controls">
             <h2>Controles</h2>
-            <button id="addRoute">Adicionar Rota</button>
-            <button id="mergeRoutes">Mesclar Rotas</button>
-            <button id="saveRoute">Salvar Rota</button>
-            <button id="getLocationInfo">Obter informações da localização</button>
+            <button id="addWalkingRoute">Adicionar Rota a Pé</button>
+            <button id="addBusRoute">Adicionar Rota de Ônibus</button>
 
             
+            <label for="busRouteColor" >Cor da rota de ônibus:</label>
+             <input type="color" id="busRouteColor" name="busRouteColor" value="#ff0000">
+
+            <button id="saveRoute">Salvar Rota</button>
         </section>
+        
         <section id="routeList">
             <h2>Lista de Rotas</h2>
             <ul id="routes"></ul>
