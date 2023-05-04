@@ -1,4 +1,3 @@
-// script.js
 document.addEventListener('DOMContentLoaded', function () {
     const jsonData = {
         "loginForm": {
@@ -37,6 +36,28 @@ document.addEventListener('DOMContentLoaded', function () {
         captchaImage.setAttribute('src', `https://dummyimage.com/150x50/cccccc/000000&text=${captchaText}`);
     }
 
+    function isUserLoggedIn() {
+        return localStorage.getItem('email') !== null && localStorage.getItem('password') !== null;
+    }
+
+    function toggleLoginState() {
+        const loginForm = document.querySelector('.login-form');
+        const userInfo = document.querySelector('.user-info');
+        const captcha = document.querySelector('.captcha');
+        const userEmail = document.getElementById('user-email');
+        
+        if (isUserLoggedIn()) {
+            userEmail.textContent = localStorage.getItem('email');
+            loginForm.style.display = 'none';
+            captcha.style.display = 'none';
+            userInfo.style.display = 'flex';
+        } else {
+            loginForm.style.display = 'block';
+            captcha.style.display = 'block';
+            userInfo.style.display = 'none';
+        }
+    }
+
     loginForm.addEventListener('submit', function (event) {
         event.preventDefault();
 
@@ -51,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
             errorMessage.style.display = 'none';
             localStorage.setItem('email', emailInput.value);
             localStorage.setItem('password', passwordInput.value);
-            window.location.href = data.loginForm.navigation.menuPage;
+            toggleLoginState();
         }
     });
 
@@ -59,5 +80,13 @@ document.addEventListener('DOMContentLoaded', function () {
         generateCaptcha();
     });
 
+    // Add event listener to the logout button
+    document.getElementById('logout-btn').addEventListener('click', function() {
+        localStorage.removeItem('email');
+        localStorage.removeItem('password');
+        toggleLoginState();
+    });
+
     generateCaptcha();
+    toggleLoginState();
 });
