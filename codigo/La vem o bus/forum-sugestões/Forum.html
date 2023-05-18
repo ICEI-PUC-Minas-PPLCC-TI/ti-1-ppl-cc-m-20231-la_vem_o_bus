@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fórum - Meu Transporte</title>
-    <link rel="stylesheet" href="forum.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fórum - Meu Transporte</title>
+  <link rel="stylesheet" href="forum.css">
 </head>
 <body>
     <header>
-        <img src="imagens do menu/logo.jpeg" alt="Meu Transporte">
+        <img src="../imagens do menu/logo.jpeg" alt="Meu Transporte">
         <div class="search-bar">
             <input type="text" placeholder="Pesquisar...">
-            <button onclick="location.href='menu.html'">Voltar ao menu</button>
+            <button onclick="location.href='..menu/menu.html'">Voltar ao menu</button>
 
         </div>
     </header>
-
+    <div class="main-container">
     <main>
         <div class="container">
             <section class="forum">
                 <h2>Fórum</h2>
                 <form>
-                  <label for="username">Nome de usuário:</label>
-                  <input type="text" id="username" name="username" required>
+                
                   <label for="comment">Comentário:</label>
                   <textarea id="comment" name="comment" required></textarea>
                   <button type="submit">Postar</button>
@@ -48,7 +46,7 @@
               </section>
         </div>
     </main>
-
+  </div>
     <footer>
         <p>© 2023 Todos os direitos reservados.</p>
     </footer>

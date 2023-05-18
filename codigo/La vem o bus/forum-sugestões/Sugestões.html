@@ -9,27 +9,42 @@
 <body>
     <header>
         <div class="logo">
-            <img src="imagens do menu/logo.jpeg" alt="Meu Transporte">
+            <img src="../imagens do menu/logo.jpeg" alt="Meu Transporte">
         </div>
         <div class="search-bar">
             <input type="text" placeholder="Pesquisar...">
         </div>
     </header>
-
+<section class="suggestions-history">
+    <h2>Histórico de Sugestões</h2>
+    <ul id="suggestions-list"></ul>
+</section>
     <main>
+      <button id="test-login-button">Testar Login</button>
+
         <div class="container">
             <section class="suggestions">
-              <h2>Sugestões</h2>
+              <h2 id="welcome-message">Olá, envie uma sugestão para nossa equipe.</h2>
               <form id="suggestions-form">
                 <label for="suggestion">Escreva sua sugestão:</label>
                 <textarea id="suggestion" name="suggestion" required></textarea>
                 <div class="button-group">
                   <button type="submit" id="submit-button">Enviar</button>
-                  <button onclick="location.href='menu.html'">Voltar</button>
+                  <button onclick="location.href='../menu/Menu.html'">Voltar</button>
+
                 </div>
               </form>
               <div id="loading-indicator"></div>
               <div id="sent-message"></div>
+
+              <div class="confirmation" style="display: none;">
+                <p id="confirmation-message"></p>
+                <button id="confirm-button">Confirmar</button>
+                <button id="delete-button">Excluir</button>
+              </div>
+              
+            </section>
+          </div>
             </section>
           </div>
           
@@ -43,4 +58,5 @@
     <script src="sugestoes.js"></script>
 </body>
 </html>
+
 
