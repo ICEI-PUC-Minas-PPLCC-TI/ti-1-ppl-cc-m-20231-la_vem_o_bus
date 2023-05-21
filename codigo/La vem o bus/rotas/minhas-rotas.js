@@ -87,6 +87,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         map.on('click', onMapClick);
     });
 
+    //Ajuda
+    document.getElementById('helpButton').addEventListener('click', () => {
+        alert('Clique nos botões para adicionar as rotas a pé e as rotas dos ônibus respectivamente.\nPara deletar a última linha tracejada clique no botão Remover Última Rota');
+      });
+
     // verifica se esta logado 
     function isLoggedIn() {
         
@@ -144,7 +149,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         } else {
             alert('Por favor, faça login para salvar a rota.');
         }
+        location.reload(); // Adicione esta linha para recarregar a página
     };
+
+    // Função para remover a última rota
+const removeLastRoute = () => {
+    if (currentRoutes.length > 0) {
+      const lastRoute = currentRoutes.pop();
+      map.removeLayer(lastRoute);
+    }
+  };
+
+    document.getElementById('saveRoute').addEventListener('click', saveCurrentRoute);
+    document.getElementById('removeLastRoute').addEventListener('click', removeLastRoute);
     
     // salvamento no local storage
     function loadSavedRoutes() {
