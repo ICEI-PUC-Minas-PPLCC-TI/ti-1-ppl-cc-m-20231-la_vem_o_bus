@@ -24,7 +24,9 @@ header {
     flex-grow: 1;
     padding-right:20%;
 }
-
+.popup{
+    display: none;
+}
 .logo h2 {
     font-size: 25px;
     color: white;
