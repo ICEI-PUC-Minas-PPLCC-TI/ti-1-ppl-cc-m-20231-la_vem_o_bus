@@ -4,11 +4,9 @@
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
-
 body {
     background-color: #f8f9fa;
 }
-
 header {
 
     display: flex;
@@ -18,7 +16,6 @@ header {
 
     background-color: #343a40;
 }
-
 .logo {
     text-align: center;
     flex-grow: 1;
@@ -31,25 +28,38 @@ header {
     font-size: 25px;
     color: white;
 }
-
 header .logo img {
     height: 40px;
     width: auto;
 }
-
 .destaques .rotas .rota h2 {
     color: crimson;
 }
-
 .destaques h2 {
     text-align: center;
 }
-
 .botao-voltar {
     padding-right: 5%;
 
 }
-
+.conteudo-rota button{
+    
+    padding: 0.5rem;
+    margin-top: 1rem;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.conteudo-rota button:hover {
+    background-color: #0056b3;
+}
+.conteudo-rota button:active {
+    background-color: #004085;
+}
 .botao-voltar button {
 
     padding: 0.5rem;
@@ -61,20 +71,16 @@ header .logo img {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
 .botao-voltar button:hover {
     background-color: #0056b3;
 }
-
 .botao-voltar button:active {
     background-color: #004085;
 }
-
 .destaques {
 
     padding-top: 5%;
 }
-
 .rota {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -84,32 +90,26 @@ header .logo img {
     border: 2px greenyellow solid;
     width: 70%;
 }
-
 .rota img {
     justify-self: center;
     max-width: 100%;
     height: auto;
 }
-
 .rota-link {
     display: inline-block;
     text-decoration: none;
     width: 100%;
     box-sizing: border-box;
 }
-
 .rota-link img {
     border: none;
 }
-
 main {
     display: grid;
     grid-template-columns: 7fr 3fr;
     background-color: #f8f9fa;
     max-height: 1000px;
 }
-
-
 .rotas {
     align-items: center;
     display: flex;
@@ -120,15 +120,17 @@ main {
     padding-top: 1%;
 
 }
-
-
-.right-section {
+.popup{
+    grid-column: span 2; 
+    width: 70%;
+    padding-left: 25%;
+    padding-top: 5%;
+}.right-section {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 
 }
-
 .buttons {
 
     margin: 10%;
@@ -138,7 +140,6 @@ main {
     height: auto;
 
 }
-
 .buttons button {
     padding: 0.5rem;
     font-size: 16px;
@@ -149,17 +150,16 @@ main {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
 .buttons button:hover {
     background-color: #0056b3;
 }
-
 .buttons button:active {
     background-color: #004085;
 }
-
-
-
+.botoes-container{
+    display: inline-block;
+    margin-right: 5px;
+}
 footer {
     background-color: #343a40;
     color: #f8f9fa;
@@ -171,7 +171,6 @@ footer {
     bottom: 0;
     width: 100%;
 }
-
 footer p {
     margin: 0;
 }

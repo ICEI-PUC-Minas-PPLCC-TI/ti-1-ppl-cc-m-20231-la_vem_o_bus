@@ -15,7 +15,7 @@ const ROTAS = [
         imagem: "https://www.google.com/logos/google.jpg"
     },
     {
-        titulo: "cachorro quente",
+        titulo: "cdfajgnidangfuadbnfuoate",
         descricao: "rota que passa pelo cachorro quente",
         imagem: "https://www.google.com/logos/google.jpg"
     },
@@ -56,14 +56,16 @@ rotassalvas.forEach(receberrota => {
     let rota = document.createElement("div");
     let imagem = document.createElement("img");
     let conteudorota = document.createElement("div");
-    let botaoApagar = document.createElement("button");
+    let botaoApagar = document.createElement("button")
     let popup = document.createElement("div")
     let botaovoltar = document.createElement("button")
+    let botaoIniciarRota = document.createElement("button");
+    let botoesContainer = document.createElement("div");
+
     rota.id = "rota-" + contadorId;
 
     popup.classList.add("popup")
     rota.classList.add("rota");
-    rota.id = "rota-" + contadorId;
     idsRotas.push(rota.id);
     imagem.src = receberrota.imagem;
     conteudorota.classList.add("conteudo-rota");
@@ -80,12 +82,29 @@ rotassalvas.forEach(receberrota => {
     rota.append(popup);
 
     popup.innerHTML = `<div class='popup-content'><h2>Confirmação</h2><p>Você tem certeza disso?</p><div class='buttons'id="botoes-${contadorId}"><button onclick='apagarRota(${contadorId})'>Sim</button></div></div>`
+
     botaovoltar.innerHTML = "Voltar"
     botaoApagar.innerHTML = "Apagar Rota";
     botaoApagar.onclick = function () {
         confirmacao(popup);
     };
+    botaoApagar.onclick = function () {
+        confirmacao(popup);
+    };
 
+   
+    botaoIniciarRota.innerHTML = "Iniciar Rota";
+
+    botaoIniciarRota.onclick = function () {
+        iniciarRota();
+    };
+
+    
+    botoesContainer.classList.add("botoes-container");
+
+    botoesContainer.append(botaoApagar);
+    botoesContainer.append(botaoIniciarRota);
+    conteudorota.append(botoesContainer);
     conteudorota.append(botaoApagar);
 
     let rotas = document.querySelector(".rotas");
@@ -97,7 +116,7 @@ rotassalvas.forEach(receberrota => {
     document.querySelector(`#botoes-${contadorId}`).append(botaovoltar)
 });
 function apagarRota(id) {
-    console.log(id)
+
     let rota = document.getElementById("rota-" + id);
     if (rota) {
         let rotas = document.querySelector(".rotas");
@@ -110,6 +129,10 @@ function confirmacao(popup) {
     popup.style.display = "block"
 }
 function voltarpagina(popup) {
-    console.log(popup)
+
     popup.style.display = "none";
 }
+function iniciarRota(id) {
+    window.location.href = "minhas-rotas/rotas-teste.html" + id;
+  }
+  
