@@ -53,6 +53,7 @@ let idsRotas = [];
 rotassalvas.forEach(receberrota => {
     contadorId++;
 
+    
     let rota = document.createElement("div");
     let imagem = document.createElement("img");
     let conteudorota = document.createElement("div");
@@ -117,7 +118,8 @@ function apagarRota(id) {
         let rotas = document.querySelector(".rotas");
         rotas.removeChild(rota);
     }
-    rotassalvas.splice(id, 1)
+    let index=id-1
+    rotassalvas.splice(index, 1)
     localStorage.setItem("ROTAS", JSON.stringify(rotassalvas))
 }
 function confirmacao(popup) {
@@ -128,6 +130,6 @@ function voltarpagina(popup) {
     popup.style.display = "none";
 }
 function iniciarRota(id) {
-    window.location.href = "minhas-rotas/rotas-teste.html?id=" + id;
+    let url = "rotas-teste.html?id=" + id;
+    window.location.href = url;
   }
-  
