@@ -1,46 +1,46 @@
 const ROTAS = [
     {
-        titulo: "cachorro quente",
+        titulo: "Cachorro Quente",
         descricao: "rota que passa pelo cachorro quente",
         imagem: "https://www.google.com/logos/google.jpg"
     },
     {
-        titulo: "cachorro quente",
-        descricao: "rota que passa pelo cachorro quente",
+        titulo: "Caminhada",
+        descricao: "Rota longa que fiz para andar muito",
         imagem: "https://www.google.com/logos/google.jpg"
     },
     {
-        titulo: "cachorro quente",
-        descricao: "rota que passa pelo cachorro quente",
+        titulo: "Rota atrasado pro trabalho 30min",
+        descricao: "Corre-Corre",
         imagem: "https://www.google.com/logos/google.jpg"
     },
     {
-        titulo: "cdfajgnidangfuadbnfuoate",
-        descricao: "rota que passa pelo cachorro quente",
+        titulo: "Casa da namorada",
+        descricao: "Auto-explicativa",
         imagem: "https://www.google.com/logos/google.jpg"
     },
     {
-        titulo: "cachorro quente",
-        descricao: "rota que passa pelo cachorro quente",
+        titulo: "Passando pela livraria",
+        descricao: "Rota que deixa eu ficar 30min perdendo tempo na livraria",
         imagem: "https://www.google.com/logos/google.jpg"
     },
     {
-        titulo: "cachorro quente",
-        descricao: "rota que passa pelo cachorro quente",
+        titulo: "SINUQUINHAAAAAAAA",
+        descricao: "Rota que leva pra sinuca do seu zé",
         imagem: "https://www.google.com/logos/google.jpg"
     },
     {
-        titulo: "cachorro quente",
-        descricao: "rota que passa pelo cachorro quente",
+        titulo: "Entao, rota pra um dia triste",
+        descricao: "Rota que demora bastante pra chegar em casa e da pra escutar musica",
         imagem: "https://www.google.com/logos/google.jpg"
     },
     {
-        titulo: "cachorro quente",
-        descricao: "rota que passa pelo cachorro quente",
+        titulo: "Cansei",
+        descricao: "Sem ideias",
         imagem: "https://www.google.com/logos/google.jpg"
     }
 ]
-localStorage.setItem("ROTAS", JSON.stringify(ROTAS))
+//localStorage.setItem("ROTAS", JSON.stringify(ROTAS))
 
 if (localStorage.getItem("ROTAS") === null) {
     localStorage.setItem("ROTAS", JSON.stringify(ROTAS))
@@ -88,15 +88,10 @@ rotassalvas.forEach(receberrota => {
     botaoApagar.onclick = function () {
         confirmacao(popup);
     };
-    botaoApagar.onclick = function () {
-        confirmacao(popup);
-    };
-
-   
+      
     botaoIniciarRota.innerHTML = "Iniciar Rota";
-
     botaoIniciarRota.onclick = function () {
-        iniciarRota();
+        iniciarRota(contadorId); 
     };
 
     
@@ -133,6 +128,6 @@ function voltarpagina(popup) {
     popup.style.display = "none";
 }
 function iniciarRota(id) {
-    window.location.href = "minhas-rotas/rotas-teste.html" + id;
+    window.location.href = "minhas-rotas/rotas-teste.html?id=" + id;
   }
   

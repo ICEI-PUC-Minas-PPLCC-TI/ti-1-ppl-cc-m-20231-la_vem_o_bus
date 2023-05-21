@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Recebendo o ID</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      text-align: center;
+      font-size: 24px;
+      padding-top: 100px;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const id = urlParams.get('id');
+
+    document.write("Você recebeu o ID: " + id);
+  </script>
+</body>
+</html>

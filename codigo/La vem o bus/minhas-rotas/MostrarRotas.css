@@ -33,10 +33,11 @@ header .logo img {
     width: auto;
 }
 .destaques .rotas .rota h2 {
-    color: crimson;
+    color: rgb(33, 20, 220);
 }
 .destaques h2 {
     text-align: center;
+    color :rgb(33,20,220);
 }
 .botao-voltar {
     padding-right: 5%;
@@ -87,9 +88,11 @@ header .logo img {
     align-items: center;
     text-align: center;
     padding: 2%;
-    border: 2px greenyellow solid;
     width: 70%;
-}
+    background-color: #ffffff;
+    border: 2px solid blue;
+    border-radius: 10%;
+  }
 .rota img {
     justify-self: center;
     max-width: 100%;
@@ -123,7 +126,7 @@ main {
 .popup{
     grid-column: span 2; 
     width: 70%;
-    padding-left: 25%;
+    padding-left: 30%;
     padding-top: 5%;
 }.right-section {
     display: flex;
