@@ -55,9 +55,9 @@ header .logo img {
     padding-top: 5%;
 }
 .rotas{
- 
-    padding-top: 1%;
-
+    overflow-y: auto;
+  max-height: calc(100vh - 200px); 
+  padding-top: 1%;
 }
 
 .rota-link {
@@ -75,6 +75,7 @@ main {
     display: grid;
     grid-template-columns: 7fr 3fr;
     background-color: #f8f9fa;
+    max-height: 1000px;
 }
 
 
@@ -131,7 +132,7 @@ footer {
     text-align: center;
     font-size: 14px;
     grid-column: 1 / -1;
-    position: fixed;
+   position: fixed;
     bottom: 0;
     width: 100%;
   }
