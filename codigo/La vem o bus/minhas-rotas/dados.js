@@ -42,16 +42,22 @@ const ROTAS = [
 ]
 ROTAS.forEach(receberrota => {
     let rota = document.createElement("div")
-    let titulo = document.createElement("h2")
-    let descricao = document.createElement("h3")
     let imagem = document.createElement("img")
+    let conteudorota = document.createElement("div")
+
     rota.classList.add("rota")
-    titulo.innerHTML = receberrota.titulo
-    descricao.innerHTML = receberrota.descricao
     imagem.src = receberrota.imagem
-    let rotas = document.querySelector(".rotas")
+    conteudorota.classList.add("conteudo-rota")
+
+    let titulo = document.createElement("h2")
+    titulo.innerHTML = receberrota.titulo
+    let descricao = document.createElement("h3")
+    descricao.innerHTML = receberrota.descricao
+
     rota.append(imagem)
-    rota.append(titulo)
-    rota.append(descricao)
+    rota.append(conteudorota)
+    conteudorota.append(titulo)
+    conteudorota.append(descricao)
+    let rotas = document.querySelector(".rotas")
     rotas.append(rota)
 })

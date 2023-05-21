@@ -10,6 +10,7 @@ body {
 }
 
 header {
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -18,22 +19,37 @@ header {
     background-color: #343a40;
 }
 
+.logo {
+    text-align: center;
+    flex-grow: 1;
+    padding-right: 25%;
+}
+
+.logo h2 {
+    font-size: 25px;
+    color: white;
+}
+
 header .logo img {
     height: 40px;
     width: auto;
 }
-.destaques .rotas .rota h2{
+
+.destaques .rotas .rota h2 {
     color: crimson;
 }
-.destaques h2{
+
+.destaques h2 {
     text-align: center;
 }
-.botao-voltar{
+
+.botao-voltar {
     padding-right: 5%;
-    
+
 }
-.botao-voltar button{
-    
+
+.botao-voltar button {
+
     padding: 0.5rem;
     font-size: 16px;
     color: white;
@@ -43,32 +59,45 @@ header .logo img {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
 .botao-voltar button:hover {
     background-color: #0056b3;
-}   
+}
+
 .botao-voltar button:active {
     background-color: #004085;
 }
 
-.destaques{
+.destaques {
 
     padding-top: 5%;
 }
-.rotas{
-    overflow-y: auto;
-  max-height: calc(100vh - 200px); 
-  padding-top: 1%;
+
+.rota {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    text-align: center;
+    padding: 2%;
+    border: 2px greenyellow solid;
+    width: 70%;
+}
+
+.rota img {
+    justify-self: center;
+    max-width: 100%;
+    height: auto;
 }
 
 .rota-link {
     display: inline-block;
     text-decoration: none;
-    width: 100%; 
+    width: 100%;
     box-sizing: border-box;
 }
 
 .rota-link img {
-    border: none; 
+    border: none;
 }
 
 main {
@@ -84,6 +113,10 @@ main {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    overflow-y: auto;
+    max-height: calc(90vh - 200px);
+    padding-top: 1%;
+
 }
 
 
@@ -132,18 +165,11 @@ footer {
     text-align: center;
     font-size: 14px;
     grid-column: 1 / -1;
-   position: fixed;
+    position: fixed;
     bottom: 0;
     width: 100%;
-  }
-  
-  footer p {
-    margin: 0;
-  }
-.rota{
-    padding: 2%;
-    border: 2px greenyellow solid;
-    width: 70%;
 }
-  
-  
+
+footer p {
+    margin: 0;
+}
