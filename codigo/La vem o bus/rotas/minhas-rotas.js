@@ -111,12 +111,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                         routes: currentRoutes.map(route => ({
                             coordinates: route.getLatLngs(),
                             color: route.options.color
-                        }))
+                        })),
+                        notificationPoint: notificationPoint ? notificationPoint.getLatLng() : null  // salva a posição do ponto de notificação
                     };
                     const savedRoutesJSON = localStorage.getItem(userEmail);
                     let savedRoutes = savedRoutesJSON ? JSON.parse(savedRoutesJSON) : [];
                     savedRoutes.push(savedRoute);
                     localStorage.setItem(userEmail, JSON.stringify(savedRoutes));
+        
     
     
                     const newRouteButton = document.createElement('button');
@@ -169,7 +171,7 @@ const removeLastRoute = () => {
         if (userEmail) {
             const savedRoutesJSON = localStorage.getItem(userEmail);
             const savedRoutes = savedRoutesJSON ? JSON.parse(savedRoutesJSON) : [];
-    
+        
             savedRoutes.forEach((savedRoute, index) => {
                 const routeContainer = document.createElement('div');
                 routeContainer.classList.add('route-container');
@@ -177,30 +179,40 @@ const removeLastRoute = () => {
                 const newRouteButton = document.createElement('button');
                 newRouteButton.innerText = savedRoute.name;
                 newRouteButton.classList.add('route-button');
+                
                 newRouteButton.addEventListener('click', () => {
                     // Remova as rotas atuais do mapa, se houver
                     currentRoutes.forEach(route => map.removeLayer(route));
-            
+    
+                    // Se houver um ponto de notificação no mapa, remova-o
+                    if (notificationPoint) {
+                        map.removeLayer(notificationPoint);
+                    }
+    
                     // Limpa currentRoutes
                     currentRoutes = [];
-            
+    
                     // Adicione as rotas salvas ao mapa
                     savedRoute.routes.forEach(routeCoordinates => {
                         const polylineOptions = {
                             color: routeCoordinates.color,
                         };
-            
+    
                         if (routeCoordinates.color === 'green') {
                             polylineOptions.dashArray = '5, 10';
                         }
-            
+    
                         const savedRouteLine = L.polyline(routeCoordinates.coordinates, polylineOptions).addTo(map);
                         currentRoutes.push(savedRouteLine);
                     });
+    
+                    // Se um ponto de notificação foi salvo com as rotas, adicione-o ao mapa
+                    if (savedRoute.notificationPoint) {
+                        notificationPoint = L.marker(savedRoute.notificationPoint, {icon: notificationIcon}).addTo(map);
+                    }
                 });
-                // deletar rotas 
-                const deleteRouteButton = document.createElement('button');
             
+                const deleteRouteButton = document.createElement('button');
                 deleteRouteButton.innerText = 'Excluir';
                 deleteRouteButton.classList.add('delete-route-button');
                 deleteRouteButton.addEventListener('click', () => {
@@ -219,14 +231,11 @@ const removeLastRoute = () => {
                 routeContainer.appendChild(deleteRouteButton);
                 document.getElementById('routes').appendChild(routeContainer);
             });
-            
-            
         }
     }
-
+    
     document.getElementById('saveRoute').addEventListener('click', saveCurrentRoute);
-
-
+    
 
     // rota de onibus
     const createBusRoute = async (point1, point2, color) => {
@@ -328,6 +337,11 @@ const removeLastRoute = () => {
         }
     }, 1000);
     
+    if (savedRoute.notificationPoint) {
+        addNotificationPointToMap(savedRoute.notificationPoint);
+    }
+
+
 
     
     }); // Feche o eventListener 'DOMContentLoaded'
