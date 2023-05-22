@@ -1,127 +1,299 @@
+/* Reset */
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
+/* Body and Global Styles */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
+/* Header */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    grid-column: 1 / -1;
-    background-color: #343a40;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  grid-column: 1 / -1;
+  background-color: #343a40;
 }
 
-.logo img {
-    max-width: 100%;
-    height: auto;
-    max-height: 4rem;
+.header .logo img {
+  max-width: 100%;
+  height: auto;
+  max-height: 3rem;
 }
 
-.search-bar input {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.header .search-bar input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
+
+button {
+  background-color: #007bff; /* Background color */
+  color: #fff; /* Text color */
+  border: none;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 2px 2px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #0056b3; 
+}
+
+#test-login-button {
+  position: fixed; /* Fixar o botão na posição especificada */
+  bottom: 50px; /* A mesma altura do rodapé */
+  left: 10px; /* 10px a partir da esquerda da página */
+  background-color: #007bff; /* Background color */
+  color: #fff; /* Text color */
+  border: none;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#test-login-button:hover {
+  background-color: #0056b3; 
+
+}
+
+
+
+
+
+
+
+/* Main Content */
 main {
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 8rem);
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 8rem);
 }
 
+.main .suggestions {
+  background-color: #fff;
+  padding: 4rem;
+  border-radius: 3px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
 
+.main .suggestions h2 {
+  margin-bottom: 2rem;
+}
+
+.main .container {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+/* Suggestions Section */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 2rem;
+}
 
 .suggestions {
-    background-color: #fff;
-    padding: 4rem;
-    border-radius: 3px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    text-align: center;
+  background-color: #fff;
+  width: 60%; /* Adjust this value according to your needs */
+  max-width: 800px; /* Maximum width */
+  padding: 3rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .suggestions h2 {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+  font-size: 2rem;
 }
-.container {
-    max-width: 90%; 
-    margin: 0 auto;
+
+#suggestions-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 form label {
-    display: block;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    text-align: left;
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: left;
 }
 
 form textarea {
-    width: 100%;
-    height: 15rem; 
-    padding: 0.5rem;
-    border: none;
-    border-radius: 3px;
-    resize: none;
+  width: 100%;
+  height: 15rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  margin-bottom: 1rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+}
+
+.button-group button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-right: 1rem;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button-group button:hover {
+  background-color: #0056b3;
+}
+
+#loading-indicator {
+  display: none;
+  width: 50px;
+  height: 50px;
+  margin: 1rem auto;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+}
+
+#sent-message {
+  display: none;
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  color: #007bff;
+}
+
+/* Post Confirmation */
+.confirmation {
+  display: none;
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  width: 80%;
+  max-width: 450px;
+}
+
+#confirmation-message {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
 }
 
 
+/* Form */
+form label {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+form textarea {
+  width: 100%;
+  height: 15rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 3px;
+  resize: none;
+}
+
+/* Buttons */
 .button-group button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-right: 1rem;
-    transition: background-color 0.3s ease-in-out;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-right: 1rem;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button-group button:hover {
+  background-color: #0062cc;
+}
+
+/* Loading Indicator */
+#loading-indicator {
+  display: none;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  
-  .button-group button:hover {
-    background-color: #0062cc;
+
+  100% {
+    transform: rotate(360deg);
   }
-  #loading-indicator {
-    display: none;
-    width: 50px;
-    height: 50px;
-    margin: 0 auto;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #007bff;
-    border-radius: 50%;
-    animation: spin 2s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  #sent-message {
-    display: none;
-    text-align: center;
-    font-size: 1.2rem;
-    margin-top: 1rem;
-    color: #007bff;
-  }
-  
-  #suggestions-form.loading button {
-    opacity: 0.5;
-    pointer-events: none;
-  }
-  
-  #suggestions-form.sent button {
-    background-color: #28a745;
-  }
-  
-  #suggestions-form.sent button:hover {
-    background-color: #218838;
-  }
-/* confirmação de postagem */
+}
+
+/* Sent Message */
+#sent-message {
+  display: none;
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  color: #007bff;
+}
+
+/* Forms Specific states */
+#suggestions-form.loading button {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+#suggestions-form.sent button {
+  background-color: #28a745;
+}
+
+#suggestions-form.sent button:hover {
+  background-color: #218838;
+}
+
+/* Post Confirmation */
 .confirmation {
   display: none;
   background-color: #f8f9fa;
@@ -173,11 +345,12 @@ form textarea {
 #delete-button:hover {
   background-color: #c82333;
 }
-/* sugestões  */
+
+/* Suggestions History */
 .suggestions-history {
   position: fixed;
   top: 7rem;
-  left:1rem;
+  left: 1rem;
   max-width: 300px;
   background-color: #fff;
   padding: 1rem;
@@ -187,11 +360,11 @@ form textarea {
   text-align: left;
 }
 
-
 .suggestions-history h2 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
+
 .suggestions-history li {
   display: flex;
   justify-content: space-between;
@@ -214,144 +387,141 @@ form textarea {
   background-color: #c82333;
 }
 
+/* Footer */
+footer {
+  background-color: #343a40;
+  color: #f8f9fa;
+  padding: 1rem;
+  text-align: center;
+  font-size: 14px;
+  grid-column: 1 / -1;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
 
+footer p {
+  margin: 0;
+}
 
-
-  footer {
-    background-color: #343a40;
-    color: #f8f9fa;
-    padding: 1rem;
-    text-align: center;
-    font-size: 14px;
-    grid-column: 1 / -1;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
- 
-  
-  
-  footer p {
-    margin: 0;
-  }
-  /* responsividade */
-  /* Estilos para telas menores */
+/* Responsiveness */
+/* Styles for smaller screens */
 @media screen and (max-width: 768px) {
 
-  /* Cabeçalho */
+  /* Header */
   header {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .search-bar input {
     margin-top: 1rem;
   }
-  
-  /* Formulário */
-  .suggestions {
+
+   /* Form */
+   .suggestions {
     padding: 2rem;
   }
-  
+
   form label {
     font-size: 1rem;
   }
-  
+
   form textarea {
     height: 10rem;
   }
-  
+
   .button-group button {
     margin-top: 1rem;
     margin-right: 0;
   }
-  
-  /* Histórico de sugestões */
+
+  /* Suggestions History */
   .suggestions-history {
     position: static;
     max-width: 100%;
     margin-top: 2rem;
     padding: 1rem 0;
   }
-  
+
   .suggestions-history h2 {
     font-size: 1rem;
   }
-  
+
   .suggestions-history li {
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 1rem;
   }
-  
+
   .suggestions-history button {
     margin-top: 0.5rem;
     margin-right: 0;
   }
-  
+
 }
 
-/* Estilos para telas muito pequenas */
+/* Styles for very small screens */
 @media screen and (max-width: 576px) {
 
-  /* Cabeçalho */
+  /* Header */
   .logo img {
     max-height: 3rem;
   }
-  
+
   .search-bar input {
     padding: 0.3rem;
   }
-  
-  /* Formulário */
+
+  /* Form */
   .suggestions {
     padding: 1rem;
   }
-  
+
   form label {
     font-size: 0.8rem;
   }
-  
+
   form textarea {
     height: 8rem;
   }
-  
+
   .button-group button {
     padding: 0.3rem 0.5rem;
     font-size: 0.8rem;
   }
-  
-  /* Histórico de sugestões */
+
+  /* Suggestions History */
   .suggestions-history {
     max-width: 90%;
     margin-top: 1rem;
     padding: 0.5rem;
     border-radius: 10px;
   }
-  
+
   .suggestions-history h2 {
     font-size: 0.8rem;
     margin-bottom: 0.3rem;
   }
-  
+
   .suggestions-history li {
     margin-bottom: 0.3rem;
   }
-  
+
   .suggestions-history button {
     font-size: 0.7rem;
     padding: 0.3rem 0.5rem;
   }
+
   form textarea {
     width: 100%;
-    max-width: 600px; /* Largura máxima */
+    max-width: 600px; /* Maximum width */
     height: 15rem;
     padding: 0.5rem;
     border: none;
     border-radius: 3px;
     resize: none;
-    font-size: 1rem; /* Tamanho da fonte */
-}
+    font-size: 1rem; /* Font size */
+  }
 
-  
 }

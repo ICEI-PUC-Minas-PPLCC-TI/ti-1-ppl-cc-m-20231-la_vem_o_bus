@@ -1,76 +1,78 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const jsonData = {
-    "suggestionsForm": {
-      "ids": {
-        "form": "suggestions-form",
-        "submitButton": "submit-button",
-        "loadingIndicator": "loading-indicator",
-        "sentMessage": "sent-message",
-        "suggestion": "suggestion",
-        "welcomeMessage": "welcome-message"
-      },
-      "timeout": 2000
+const jsonData = {
+  "suggestionsForm": {
+    "ids": {
+      "form": "suggestions-form",
+      "submitButton": "submit-button",
+      "loadingIndicator": "loading-indicator",
+      "sentMessage": "sent-message",
+      "suggestion": "suggestion",
+      "welcomeMessage": "welcome-message"
+    },
+    "timeout": 2000
+  }
+};
+
+const data = jsonData.suggestionsForm;
+
+let form, submitButton, loadingIndicator, sentMessage, suggestionInput, welcomeMessage, userEmail, confirmation, confirmationMessage, confirmButton, deleteButton, suggestionsHistory;
+
+function addToHistory(suggestion) {
+  const listItem = document.createElement('li');
+  listItem.textContent = suggestion;
+
+  const deleteSuggestionButton = document.createElement('button');
+  deleteSuggestionButton.textContent = 'Excluir';
+  deleteSuggestionButton.addEventListener('click', () => {
+    const suggestions = JSON.parse(localStorage.getItem(userEmail) || '[]');
+    const index = suggestions.indexOf(suggestion);
+    if (index > -1) {
+      suggestions.splice(index, 1);
+      localStorage.setItem(userEmail, JSON.stringify(suggestions));
     }
-  };
+    suggestionsHistory.removeChild(listItem);
+  });
 
-  const data = jsonData.suggestionsForm;
+  listItem.appendChild(deleteSuggestionButton);
+  suggestionsHistory.appendChild(listItem);
+}
 
-  const form = document.querySelector(`#${data.ids.form}`);
-  const submitButton = document.querySelector(`#${data.ids.submitButton}`);
-  const loadingIndicator = document.querySelector(`#${data.ids.loadingIndicator}`);
-  const sentMessage = document.querySelector(`#${data.ids.sentMessage}`);
-  const suggestionInput = document.querySelector(`#${data.ids.suggestion}`);
-  const welcomeMessage = document.querySelector(`#${data.ids.welcomeMessage}`);
+function storeSuggestion(suggestion) {
+  let suggestions = localStorage.getItem(userEmail);
+  suggestions = suggestions ? JSON.parse(suggestions) : [];
 
-  const userEmail = localStorage.getItem('email');
+  suggestions.push(suggestion);
+  localStorage.setItem(userEmail, JSON.stringify(suggestions));
+  addToHistory(suggestion);
+}
 
-  const confirmation = document.querySelector('.confirmation');
-  const confirmationMessage = document.querySelector('#confirmation-message');
-  const confirmButton = document.querySelector('#confirm-button');
-  const deleteButton = document.querySelector('#delete-button');
+function loadSuggestions() {
+  const suggestions = localStorage.getItem(userEmail);
+  if (suggestions) {
+    JSON.parse(suggestions).forEach(suggestion => addToHistory(suggestion));
+  }
+}
 
-  const suggestionsHistory = document.querySelector('.suggestions-history');
+document.addEventListener('DOMContentLoaded', function () {
+  form = document.querySelector(`#${data.ids.form}`);
+  submitButton = document.querySelector(`#${data.ids.submitButton}`);
+  loadingIndicator = document.querySelector(`#${data.ids.loadingIndicator}`);
+  sentMessage = document.querySelector(`#${data.ids.sentMessage}`);
+  suggestionInput = document.querySelector(`#${data.ids.suggestion}`);
+  welcomeMessage = document.querySelector(`#${data.ids.welcomeMessage}`);
+
+  userEmail = localStorage.getItem('email');
+
+  confirmation = document.querySelector('.confirmation');
+  confirmationMessage = document.querySelector('#confirmation-message');
+  confirmButton = document.querySelector('#confirm-button');
+  deleteButton = document.querySelector('#delete-button');
+
+  suggestionsHistory = document.querySelector('.suggestions-history');
 
   if (userEmail) {
     welcomeMessage.textContent = `Olá, envie uma sugestão para nossa equipe.`;
   } else {
     welcomeMessage.textContent = 'Por favor, faça login para enviar uma sugestão.';
-  }
-
-  function addToHistory(suggestion) {
-    const listItem = document.createElement('li');
-    listItem.textContent = suggestion;
-
-    const deleteSuggestionButton = document.createElement('button');
-    deleteSuggestionButton.textContent = 'Excluir';
-    deleteSuggestionButton.addEventListener('click', () => {
-      const suggestions = JSON.parse(localStorage.getItem(userEmail) || '[]');
-      const index = suggestions.indexOf(suggestion);
-      if (index > -1) {
-        suggestions.splice(index, 1);
-        localStorage.setItem(userEmail, JSON.stringify(suggestions));
-      }
-      suggestionsHistory.removeChild(listItem);
-    });
-
-    listItem.appendChild(deleteSuggestionButton);
-    suggestionsHistory.appendChild(listItem);
-  }
-
-  function storeSuggestion(suggestion) {
-    let suggestions = localStorage.getItem(userEmail);
-    suggestions = suggestions ? JSON.parse(suggestions) : [];
-
-    suggestions.push(suggestion);
-    localStorage.setItem(userEmail, JSON.stringify(suggestions));
-    addToHistory(suggestion);
-  }
-
-  function loadSuggestions() {
-    const suggestions = localStorage.getItem(userEmail);
-    if (suggestions) {
-      JSON.parse(suggestions).forEach(suggestion => addToHistory(suggestion));
-    }
   }
 
   loadSuggestions();
@@ -89,19 +91,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
   confirmButton.addEventListener('click', () => {
     confirmation.style.display = 'none';
-
+  
     loadingIndicator.style.display = 'block';
     submitButton.disabled = true;
-
+  
     setTimeout(() => {
       loadingIndicator.style.display = 'none';
       sentMessage.style.display = 'block';
       storeSuggestion(suggestionInput.value);
-      form.classList.add('sent');
-      suggestionInput.value = '';
+  
+      // Adiciona uma transição suave à mensagem de enviado
+      sentMessage.classList.add('fade-out');
+  
+      setTimeout(() => {
+        // Depois que a transição acabar, restaura o estado original do formulário e da mensagem
+        sentMessage.style.display = 'none';
+        sentMessage.classList.remove('fade-out');
+        form.classList.remove('sent');
+        submitButton.disabled = false;
+        suggestionInput.value = '';
+      }, 1000); // Tempo de transição
     }, data.timeout);
   });
-
+  
   deleteButton.addEventListener('click', () => {
     confirmation.style.display = 'none';
     suggestionInput.value = '';
@@ -116,7 +128,6 @@ testLoginButton.addEventListener('click', () => {
   localStorage.setItem('email', 'test@example.com');
 
   // Limpa o histórico de sugestões
-  const suggestionsHistory = document.querySelector('.suggestions-history');
   while (suggestionsHistory.firstChild) {
     suggestionsHistory.removeChild(suggestionsHistory.firstChild);
   }
@@ -125,7 +136,6 @@ testLoginButton.addEventListener('click', () => {
   loadSuggestions();
 
   // Atualiza a mensagem de boas-vindas
-  const welcomeMessage = document.querySelector(`#${data.ids.welcomeMessage}`);
   welcomeMessage.textContent = `Olá, envie uma sugestão para nossa equipe.`;
 
   // Atualiza a página

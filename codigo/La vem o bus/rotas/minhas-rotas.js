@@ -254,6 +254,82 @@ const removeLastRoute = () => {
         addingBusRoute = true;
         map.on('click', onMapClick);
     });
+
+
+    //GPS
+
+
+
     
+    // Ícone personalizado para o marcador de localização do usuário
+    const userIcon = L.icon({
+        iconUrl: 'imagens/posicao.png',
+        iconSize: [38, 38],
+        iconAnchor: [19, 38],
+        popupAnchor: [0, -38]
+    });
+    
+    function addUserLocation(lat, lng) {
+        const userLocation = L.marker([lat, lng], {icon: userIcon}).addTo(map);
+        userLocation.bindPopup('Você está aqui').openPopup();
+    }
+    
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            addUserLocation(position.coords.latitude, position.coords.longitude);
+        }, function(error) {
+            console.error('Error getting location', error);
+        });
+    } else {
+        console.error('Geolocation is not supported by this browser.');
+    }
+    
+    let notificationPoint;
+    let addNotificationMode = false;
+    
+    const notificationIcon = L.icon({
+        iconUrl: 'imagens/pin.png',
+        iconSize: [38, 38],
+        iconAnchor: [19, 38],
+        popupAnchor: [0, -38]
+    });
+    
+    function addNotificationPoint(e) {
+        if (!addNotificationMode) {
+            return;
+        }
+    
+        if (notificationPoint) {
+            map.removeLayer(notificationPoint);
+        }
+    
+        notificationPoint = L.marker(e.latlng, {icon: notificationIcon}).addTo(map);
+        addNotificationMode = false;
+    }
+    
+    map.on('click', addNotificationPoint);
+    
+    document.getElementById('addNotificationPoint').addEventListener('click', () => {
+        addNotificationMode = true;
+    });
+    
+    setInterval(() => {
+        if (notificationPoint) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                const userLatLng = L.latLng(position.coords.latitude, position.coords.longitude);
+                const notificationLatLng = notificationPoint.getLatLng();
+    
+                if (userLatLng.distanceTo(notificationLatLng) <= 20) {
+                    alert('Você está dentro de 20 metros do ponto de notificação!');
+                    map.removeLayer(notificationPoint);
+                    notificationPoint = null;
+                }
+            });
+        }
+    }, 1000);
+    
+
     
     }); // Feche o eventListener 'DOMContentLoaded'
+
+
