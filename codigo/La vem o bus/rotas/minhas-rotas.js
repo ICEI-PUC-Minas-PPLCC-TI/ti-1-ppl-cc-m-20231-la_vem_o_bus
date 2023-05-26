@@ -328,7 +328,7 @@ const removeLastRoute = () => {
                 const userLatLng = L.latLng(position.coords.latitude, position.coords.longitude);
                 const notificationLatLng = notificationPoint.getLatLng();
     
-                if (userLatLng.distanceTo(notificationLatLng) <= 20) {
+                if (userLatLng.distanceTo(notificationLatLng) <= 200) {
                     alert('Você está dentro de 20 metros do ponto de notificação!');
                     map.removeLayer(notificationPoint);
                     notificationPoint = null;
