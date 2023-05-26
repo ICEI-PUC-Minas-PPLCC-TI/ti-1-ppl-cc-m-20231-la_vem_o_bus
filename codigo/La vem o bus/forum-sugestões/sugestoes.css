@@ -19,10 +19,9 @@ header {
   background-color: #343a40;
 }
 
-.header .logo img {
-  max-width: 100%;
-  height: auto;
-  max-height: 3rem;
+header .logo img {
+  height: 40px;
+  width: auto;
 }
 
 .header .search-bar input {
