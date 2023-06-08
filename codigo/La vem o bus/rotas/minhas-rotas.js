@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
-
+    
 
     const map = L.map('map').setView([-19.920830, -43.937780], 14);
 
@@ -35,31 +35,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     let selectedPoints = [];
     let currentRoutes = [];
-    let loadedRouteIndex = -1;
-    let loadedRouteName = "";
+  
 
     const onMapClick = async (e) => {
         selectedPoints.push(e.latlng);
         if (selectedPoints.length === 2) {
-          if (addingBusRoute) {
-            const busRouteColor = document.getElementById('busRouteColor').value;
-            const newRoute = await createBusRoute(selectedPoints[0], selectedPoints[1], busRouteColor);
-            currentRoutes.push(newRoute);
-            addingBusRoute = false;
-      
-            // Atualize a flag loadedRouteIndex
-            loadedRouteIndex = currentRoutes.length - 1;
-          } else {
-            const newRoute = await createWalkingRoute(selectedPoints[0], selectedPoints[1]);
-            currentRoutes.push(newRoute);
-      
-            // Atualize a flag loadedRouteIndex
-            loadedRouteIndex = currentRoutes.length - 1;
-          }
-          selectedPoints = [];
+            if (addingBusRoute) {
+                const busRouteColor = document.getElementById('busRouteColor').value;
+                const newRoute = await createBusRoute(selectedPoints[0], selectedPoints[1], busRouteColor);
+                currentRoutes.push(newRoute);
+                addingBusRoute = false;
+            } else {
+                const newRoute = await createWalkingRoute(selectedPoints[0], selectedPoints[1]);
+                currentRoutes.push(newRoute);
+            }
+            selectedPoints = [];
         }
-      };
-      
+    };
 
 
     document.getElementById('addWalkingRoute').addEventListener('click', () => {
@@ -150,69 +142,77 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (userEmail) {
             const savedRoutesJSON = localStorage.getItem(userEmail);
             const savedRoutes = savedRoutesJSON ? JSON.parse(savedRoutesJSON) : [];
-
+    
             savedRoutes.forEach((savedRoute, index) => {
                 const routeContainer = document.createElement('div');
                 routeContainer.classList.add('route-container');
-
+    
                 const newRouteButton = document.createElement('button');
                 newRouteButton.innerText = savedRoute.name;
                 newRouteButton.classList.add('route-button');
-
+                newRouteButton.dataset.routeIndex = index;
+    
                 newRouteButton.addEventListener('click', () => {
-                    // Remova as rotas atuais do mapa, se houver
+                    // Remove as rotas atuais do mapa, se houver
                     currentRoutes.forEach(route => map.removeLayer(route));
-
+    
                     // Se houver um ponto de notificação no mapa, remova-o
                     if (notificationPoint) {
                         map.removeLayer(notificationPoint);
                     }
-
+    
                     // Limpa currentRoutes
                     currentRoutes = [];
-
-                    // Adicione as rotas salvas ao mapa
+    
+                    // Adiciona as rotas salvas ao mapa
                     savedRoute.routes.forEach(routeCoordinates => {
                         const polylineOptions = {
                             color: routeCoordinates.color,
                         };
-
+    
                         if (routeCoordinates.color === 'green') {
                             polylineOptions.dashArray = '5, 10';
                         }
-
+    
                         const savedRouteLine = L.polyline(routeCoordinates.coordinates, polylineOptions).addTo(map);
                         currentRoutes.push(savedRouteLine);
                     });
-
+    
                     // Se um ponto de notificação foi salvo com as rotas, adicione-o ao mapa
                     if (savedRoute.notificationPoint) {
                         notificationPoint = L.marker(savedRoute.notificationPoint, { icon: notificationIcon }).addTo(map);
                     }
+    
+                    // Remove a classe 'selected' de todos os botões das rotas
+                    const routeButtons = document.querySelectorAll('.route-button');
+                    routeButtons.forEach(button => button.classList.remove('selected'));
+    
+                    // Adiciona a classe 'selected' ao botão da rota selecionada
+                    newRouteButton.classList.add('selected');
                 });
-
+    
                 const deleteRouteButton = document.createElement('button');
                 deleteRouteButton.innerText = 'Excluir';
                 deleteRouteButton.classList.add('delete-route-button');
                 deleteRouteButton.addEventListener('click', () => {
-                    // Exclui a rota do localStorage
+                    // Remove a rota do localStorage
                     savedRoutes.splice(index, 1);
                     localStorage.setItem(userEmail, JSON.stringify(savedRoutes));
-
+    
                     // Remove os elementos da rota e do botão da página
                     routeContainer.remove();
-
+    
                     // Recarrega a página após excluir a rota
                     location.reload();
                 });
-
+    
                 routeContainer.appendChild(newRouteButton);
                 routeContainer.appendChild(deleteRouteButton);
                 document.getElementById('routes').appendChild(routeContainer);
             });
         }
     }
-
+    
     document.getElementById('saveRoute').addEventListener('click', saveCurrentRoute);
 
 
@@ -245,7 +245,30 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
     //GPS
-
+    if (navigator.geolocation) {
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+    
+        const successCallback = function (position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+    
+            // Atualize a posição do usuário no mapa ou realize outras ações necessárias
+            // Exemplo: addUserLocation(latitude, longitude);
+        };
+    
+        const errorCallback = function (error) {
+            console.error('Error getting location', error);
+        };
+    
+        const watchId = navigator.geolocation.watchPosition(successCallback, errorCallback, options);
+    } else {
+        console.error('Geolocation is not supported by this browser.');
+    }
+    
 
 
 
@@ -344,42 +367,52 @@ document.addEventListener('DOMContentLoaded', async () => {
             alert('Nenhum ponto de notificação para remover.');
         }
     });
-
-    document.getElementById('saveRouteEdit').addEventListener('click', saveEditedRoute);
-
-  function saveEditedRoute() {
-    const userEmail = isLoggedIn();
-    if (userEmail) {
-      const savedRoutesJSON = localStorage.getItem(userEmail);
-      const savedRoutes = savedRoutesJSON ? JSON.parse(savedRoutesJSON) : [];
-
-      if (loadedRouteIndex !== -1) {
-        const loadedRoute = currentRoutes[loadedRouteIndex];
-        loadedRoute.name = loadedRouteName;
-        loadedRoute.notificationPoint = notificationPoint ? notificationPoint.getLatLng() : null;
-
-        const updatedRoute = {
-          coordinates: loadedRoute.getLatLngs(),
-          color: loadedRoute.options.color
-        };
-
-        savedRoutes[loadedRouteIndex].routes = [updatedRoute];
-        savedRoutes[loadedRouteIndex].notificationPoint = notificationPoint ? notificationPoint.getLatLng() : null;
-
-        localStorage.setItem(userEmail, JSON.stringify(savedRoutes));
-
-        alert('Rota atualizada com sucesso!');
-      } else {
-        alert('Nenhuma rota carregada no mapa para ser atualizada.');
-      }
-    } else {
-      alert('Por favor, faça login para salvar a rota.');
-    }
-  }
+    const updateRoute = () => {
+        const userEmail = isLoggedIn();
+        if (userEmail) {
+            const selectedRouteButton = document.querySelector('.route-button.selected');
+            if (selectedRouteButton) {
+                const routeIndex = parseInt(selectedRouteButton.dataset.routeIndex);
+                const savedRoutesJSON = localStorage.getItem(userEmail);
+                const savedRoutes = savedRoutesJSON ? JSON.parse(savedRoutesJSON) : [];
+    
+                if (!isNaN(routeIndex) && routeIndex >= 0 && routeIndex < savedRoutes.length) {
+                    const selectedRoute = savedRoutes[routeIndex];
+    
+                    if (currentRoutes.length > 0) {
+                        const routeName = prompt("Digite um novo nome para a rota:");
+                        if (routeName) {
+                            selectedRoute.name = routeName;
+                            selectedRoute.routes = currentRoutes.map(route => ({
+                                coordinates: route.getLatLngs(),
+                                color: route.options.color
+                            }));
+                            selectedRoute.notificationPoint = notificationPoint ? notificationPoint.getLatLng() : null;
+    
+                            localStorage.setItem(userEmail, JSON.stringify(savedRoutes));
+                            alert('Rota atualizada com sucesso!');
+                            currentRoutes = [];
+                            location.reload();
+                        } else {
+                            alert('Nome inválido para a rota.');
+                        }
+                    } else {
+                        alert('Nenhuma rota para atualizar. Por favor, crie uma rota primeiro.');
+                    }
+                }
+            } else {
+                alert('Nenhuma rota selecionada. Por favor, selecione uma rota para atualizar.');
+            }
+        } else {
+            alert('Por favor, faça login para atualizar a rota.');
+        }
+        location.reload();
+    };
+    
+    
+    
+    document.getElementById('updateRoute').addEventListener('click', updateRoute);
+    
     
 
-
-
 }); // Feche o eventListener 'DOMContentLoaded'
-
-
