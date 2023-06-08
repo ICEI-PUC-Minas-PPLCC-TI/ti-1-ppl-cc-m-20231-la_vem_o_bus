@@ -290,6 +290,23 @@ body {
     .comment form button:active {
     background-color: #004085;
     }
+
+/*    .like-button {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-image: url('coracao.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+    */
+
+    .like-button.liked {
+      color: red;
+    }
+    
+    
     
     footer {
         background-color: #343a40;
