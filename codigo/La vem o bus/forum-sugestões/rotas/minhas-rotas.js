@@ -219,7 +219,7 @@ const removeLastRoute = () => {
                     // Exclui a rota do localStorage
                     savedRoutes.splice(index, 1);
                     localStorage.setItem(userEmail, JSON.stringify(savedRoutes));
-                
+
                     // Remove os elementos da rota e do botão da página
                     routeContainer.remove();
                 
@@ -233,7 +233,7 @@ const removeLastRoute = () => {
             });
         }
     }
-    
+
     document.getElementById('saveRoute').addEventListener('click', saveCurrentRoute);
     
 

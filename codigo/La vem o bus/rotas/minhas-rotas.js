@@ -193,6 +193,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     
                 const deleteRouteButton = document.createElement('button');
                 deleteRouteButton.innerText = 'Excluir';
+                const publishRouteButton = document.createElement('button');
+                publishRouteButton.innerText = 'Publicar';
+                publishRouteButton.addEventListener('click', function() {
+                    window.location.href = '../forum-sugestões/Forum.html';
+                  });
                 deleteRouteButton.classList.add('delete-route-button');
                 deleteRouteButton.addEventListener('click', () => {
                     // Remove a rota do localStorage
@@ -205,14 +210,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                     // Recarrega a página após excluir a rota
                     location.reload();
                 });
-    
                 routeContainer.appendChild(newRouteButton);
                 routeContainer.appendChild(deleteRouteButton);
+                routeContainer.appendChild(publishRouteButton);
                 document.getElementById('routes').appendChild(routeContainer);
             });
         }
     }
-    
+
     document.getElementById('saveRoute').addEventListener('click', saveCurrentRoute);
 
 
@@ -360,7 +365,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                         savedRoute.notificationPoint = null;
                     }
                 });
-
                 localStorage.setItem(userEmail, JSON.stringify(savedRoutes));
             }
         } else {

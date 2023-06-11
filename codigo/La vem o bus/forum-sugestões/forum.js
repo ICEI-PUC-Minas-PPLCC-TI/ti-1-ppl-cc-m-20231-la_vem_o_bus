@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function() {
       localStorage.setItem("comentarios", JSON.stringify(comentarios));
     }
   }
-
+  
   // Função para carregar os comentários salvos no localStorage
   function carregarComentarios() {
     const comentariosArmazenados = localStorage.getItem("comentarios");
@@ -183,3 +183,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
   exibirComentariosSalvos();
 });
+ 
