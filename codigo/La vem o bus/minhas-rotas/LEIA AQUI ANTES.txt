@@ -1,0 +1,5 @@
+ola avaliador :D, eu fiquei com a parte de mostrar as rotas na sprint 2, na sprint 3 eu adicionei elementos para filtrar e 
+buscar.
+Caso sem querer voce tenha apagado todas as rotas existe dentro do Js logo abaixo da tabela uma linha comentada
+apenas descomente ela, salve, comente e salve de novo que os dados seram resetados
+como eu nao tenho adição de rotas essa eh a forma de '' resetar'' a tabela

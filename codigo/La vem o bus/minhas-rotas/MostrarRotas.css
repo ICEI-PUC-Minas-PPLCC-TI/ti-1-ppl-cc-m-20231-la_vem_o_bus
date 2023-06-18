@@ -43,6 +43,17 @@ header .logo img {
     padding-right: 5%;
 
 }
+.butao {
+    padding: 0.5rem;
+    margin-top: 1rem;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 .conteudo-rota button{
     
     padding: 0.5rem;
@@ -177,3 +188,21 @@ footer {
 footer p {
     margin: 0;
 }
+.destaques{
+    text-align: center;
+    align-items: center;
+}
+#opa {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+  
+  #opa:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }

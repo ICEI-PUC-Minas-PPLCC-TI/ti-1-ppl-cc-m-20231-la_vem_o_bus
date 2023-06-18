@@ -3,8 +3,9 @@ const ROTAS = [
         titulo: "Cachorro Quente",
         descricao: "rota que passa pelo cachorro quente",
         imagem: "https://www.google.com/logos/google.jpg",
+        id: "11",
         tempo: "60",
-        dfinal: "a",
+        dfinal: "seu ze",
         dinicial: "casa",
         valor: "12"
     },
@@ -12,8 +13,9 @@ const ROTAS = [
         titulo: "Caminhada",
         descricao: "Rota longa que fiz para andar muito",
         imagem: "https://www.google.com/logos/google.jpg",
+        id: "10",
         tempo: "40",
-        dfinal: "b",
+        dfinal: "marmita",
         dinicial: "a",
         valor: "6"
     },
@@ -21,8 +23,9 @@ const ROTAS = [
         titulo: "Rota atrasado pro trabalho 30min",
         descricao: "Corre-Corre",
         imagem: "https://www.google.com/logos/google.jpg",
+        id: "1",
         tempo: "30",
-        dfinal: "c",
+        dfinal: "inferno",
         dinicial: "casa",
         valor: "6"
     },
@@ -30,6 +33,7 @@ const ROTAS = [
         titulo: "Casa da namorada",
         descricao: "Auto-explicativa",
         imagem: "https://www.google.com/logos/google.jpg",
+        id: "2",
         tempo: "40",
         dfinal: "liberdade",
         dinicial: "Faculdade",
@@ -39,6 +43,7 @@ const ROTAS = [
         titulo: "Passando pela livraria",
         descricao: "Rota que deixa eu ficar 30min perdendo tempo na livraria",
         imagem: "https://www.google.com/logos/google.jpg",
+        id: "3",
         tempo: "50",
         dfinal: "casa",
         dinicial: "casa",
@@ -48,6 +53,7 @@ const ROTAS = [
         titulo: "SINUQUINHAAAAAAAA",
         descricao: "Rota que leva pra sinuca do seu zé",
         imagem: "https://www.google.com/logos/google.jpg",
+        id: "4",
         tempo: "10",
         dfinal: "cachorro quente",
         dinicial: "Faculdade",
@@ -57,6 +63,7 @@ const ROTAS = [
         titulo: "Entao, rota pra um dia triste",
         descricao: "Rota que demora bastante pra chegar em casa e da pra escutar musica",
         imagem: "https://www.google.com/logos/google.jpg",
+        id: "8",
         tempo: "20",
         dfinal: "casa",
         dinicial: "casa",
@@ -66,8 +73,9 @@ const ROTAS = [
         titulo: "Cansei",
         descricao: "Sem ideias",
         imagem: "https://www.google.com/logos/google.jpg",
+        id: "8",
         tempo: "35",
-        dfinal: "a",
+        dfinal: "pracinha",
         dinicial: "a",
         valor: "18"
     }
@@ -84,11 +92,10 @@ let idsRotas = [];
 
 function construir(rotasatuais){
     rotasatuais.forEach(receberrota => {
-        contadorId++;
-    
-    
+        contadorId++;    
         let rota = document.createElement("div");
         let imagem = document.createElement("img");
+        
         let conteudorota = document.createElement("div");
         let botaoApagar = document.createElement("button")
         let popup = document.createElement("div")
@@ -108,11 +115,20 @@ function construir(rotasatuais){
         titulo.innerHTML = receberrota.titulo;
         let descricao = document.createElement("h3");
         descricao.innerHTML = receberrota.descricao;
+        let valor  = document.createElement("h5");
+        valor.innerHTML = "R$"+ receberrota.valor
+        let destino = document.createElement("h6");
+        destino.innerHTML = "Destino Final: "+receberrota.dfinal
+        let tempo = document.createElement("h7");
+        tempo.innerHTML = receberrota.tempo+" minutos"
     
         rota.append(imagem);
         rota.append(conteudorota);
         conteudorota.append(titulo);
         conteudorota.append(descricao);
+        conteudorota.append(valor);
+        conteudorota.append(tempo);
+        conteudorota.append(destino);
         rota.append(popup);
     
         popup.innerHTML = `<div class='popup-content'><h2>Confirmação</h2><p>Você tem certeza disso?</p><div class='buttons'id="botoes-${contadorId}"><button onclick='apagarRota(${contadorId})'>Sim</button></div></div>`
@@ -124,8 +140,11 @@ function construir(rotasatuais){
         };
     
         botaoIniciarRota.innerHTML = "Iniciar Rota";
+        
+        botaoIniciarRota.id=`${receberrota.id}`
+        console.log(receberrota.id)
         botaoIniciarRota.onclick = function () {
-            iniciarRota(contadorId);
+            iniciarRota(botaoIniciarRota.id);
         };
     
     
