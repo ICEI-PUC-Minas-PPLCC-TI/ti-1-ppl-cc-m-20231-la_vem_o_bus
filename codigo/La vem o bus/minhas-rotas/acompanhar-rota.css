@@ -1,41 +1,8 @@
-/* Reset */
+/* General Resets */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  /* Cores */
-  :root {
-    --primary-color: #007bff;
-    --secondary-color: #4caf50;
-    --light-gray: #f1f1f1;
-    --dark-gray: #333;
-  }
-  
-  /* Estilos gerais */
-  body {
-    background-color: var(--light-gray);
-  }
-  
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  h1, h2 {
-    color: var(--primary-color);
-  }
-  
-  /* Cabeçalho */
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    grid-column: 1 / -1;
-    background-color: #343a40;
   }
   
   header .logo img {
@@ -43,199 +10,142 @@
     width: auto;
   }
   
-  header h1 {
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #343a40;
+    color: #fff;
+  }
+  /* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #343a40;
     color: #fff;
   }
   
-  .button-group {
+  header .logo {
     display: flex;
     align-items: center;
   }
   
-  .button-group button {
-    padding: 0.5rem;
-    font-size: 14px;
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  header .logo h1 {
+    font-size: 24px;
     margin-left: 10px;
-  }
-  
-  .button-group button:first-child {
-    margin-left: 0;
-  }
-  
-  #helpButton {
-    width: 80px;
-  }
-  
-  #backToMenu {
-    width: 120px;
-  }
-  
-  /* Principal */
-  main {
-    display: flex;
-    padding: 1rem;
-  }
-  
-  /* Mapa */
-  #map {
-    width: 70%;
-    height: 600px;
-    margin-right: 1rem;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  
-  /* Controles */
-  #controls {
-    flex: 1;
-  }
-  
-  #controls h2 {
-    margin-bottom: 1rem;
-  }
-  
-  button {
-    display: block;
-    width: 100%;
-    background-color: var(--secondary-color);
-    border: none;
-    border-radius: 5px;
-    padding: 0.5rem;
     color: #fff;
+  }
+  
+  header .button-group a {
+    text-decoration: none;
+  }
+  
+  header .button-group button {
+    background-color: #007acc;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
     cursor: pointer;
-    margin-bottom: 1rem;
     transition: background-color 0.3s;
   }
   
-  button:hover {
-    background-color: #43a047;
+  header .button-group button:hover {
+    background-color: #039aff;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  .route-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
-    font-size: 16px;
+  header .button-group button a {
+    color: #fff;
   }
-  
-  .route-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .route-button:active {
-    background-color: #004085;
-  }
-  
-  /* Lista de rotas */
-  #routeList {
+  /* Main Content styles */
+  main {
     flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
-  #routeList h2 {
-    margin-bottom: 1rem;
+  #map {
+    width: 100%;
+    max-width: 100%;
+    height: 60vh;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
   }
-  
-  #routes li {
-    list-style-type: none;
-    background-color: #fff;
-    border: 1px solid var(--dark-gray);
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border-radius: 5px;
-  }
-  
-  .delete-route-button {
-    background-color: red;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin-left: 5px;
-    padding: 5px 10px;
-    font-size: 14px;
-  }
-  
-  .delete-route-button:hover {
-    background-color: rgb(215, 15, 15);
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin-left: 5px;
-    padding: 5px 10px;
-    font-size: 14px;
-  }
-  
-  /* Estilos para o input de cor da rota de ônibus */
-  label[for="busRouteColor"] {
+
+  .route-legend {
     display: inline-block;
-    margin-right: 10px;
-  }
-  
-  input[type="color"]#busRouteColor {
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    padding: 0;
-    outline: none;
-  }
-  
-  input[type="color"]#busRouteColor:focus {
-    border-color: #66afe9;
-    box-shadow: 0 0 3px rgba(102, 175, 233, 0.6);
-  }
-  
-  /* Estilos para a seção de escolha de cor */
-  .color-selection {
-    background-color: #f5f5f5;
-    border-radius: 4px;
-    padding: 10px;
-    display: inline-block;
-    margin: 10px 0;
-  }
-  
-  .color-selection label {
-    font-size: 14px;
-    font-weight: bold;
+    width: 10px;
+    height: 20px;
     margin-right: 5px;
-  }
+    border: 2px solid;
+    /* Outros estilos da legenda da rota */
+}
+
+.route-description-container {
+  background-color: #f5f5f5;
+  border: 2px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  /* Outros estilos desejados */
+}
+
+.route-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.route-list li {
+  margin-bottom: 10px;
+}
+
+
   
-  .color-selection p {
-    margin: 5px 0;
-  }
-  
-  
-  .details {
-    background-color: #fff;
-    border: 1px solid var(--dark-gray);
-    padding: 0.5rem;
-    border-radius: 5px;
-    margin-top: 1rem;
-  }
-  
-  
-  /* Rodapé */
+  /* Footer styles */
   footer {
     background-color: #343a40;
-    color: #f8f9fa;
-    padding: 1rem;
+    color: #fff;
+    padding: 10px 0;
     text-align: center;
-    font-size: 14px;
-    grid-column: 1 / -1;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    flex-shrink: 0;
   }
   
-  footer p {
-    margin: 0;
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    header {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+  
+    header .logo {
+      margin-bottom: 10px;
+    }
+  
+    main {
+      padding: 10px;
+    }
+  
+    #map {
+      height: 40vh;
+    }
   }
+  

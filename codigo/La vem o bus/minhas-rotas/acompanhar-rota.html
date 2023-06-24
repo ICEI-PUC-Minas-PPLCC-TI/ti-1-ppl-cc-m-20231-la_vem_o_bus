@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criador de Rotas de Ônibus</title>
+    <title>acompanhar sua Rota de Ônibus</title>
     <link rel="stylesheet" href="acompanhar-rota.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
@@ -23,18 +23,20 @@
         <div class="logo">
           <img src="/imagens do menu/logo.jpeg">
         </div>
-        <h1>Criador de Rotas de Ônibus</h1>
+        <h1>Acompanhe suas Rotas de Ônibus</h1>
         <div class="button-group">
-          <button id="helpButton">Ajuda</button>
           <button id="backToMenu"><a href="../minhas-rotas/MostrarRotas.html">Voltar ao menu de rotas</a></button>
         </div>
       </header>
     <main>
         <div id="map"></div>
-
-  
-          
         </section>
+
+        <div id="route-description" class="route-description-container">
+          <h2>Descrição da Rota</h2>
+          <ul id="route-list" class="route-list"></ul>
+        </div>
+        
     </main>
     <footer>
         <p>&copy; 2023 - Todos os direitos reservados</p>

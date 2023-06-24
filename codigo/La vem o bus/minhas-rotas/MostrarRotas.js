@@ -29,32 +29,33 @@ document.addEventListener("DOMContentLoaded", function() {
             descriptionElement.textContent = route.routes.map(r => r.description).join(', ');
             routeElement.appendChild(descriptionElement);
 
+                let startRouteButton = document.createElement("button");
+                startRouteButton.textContent = "Iniciar Rota";
+                startRouteButton.classList.add("start-button");
+                startRouteButton.addEventListener('click', function() {
+                    // Save the current route in local storage
+                    localStorage.setItem('rotaAtual', JSON.stringify(route));
 
-            let startRouteButton = document.createElement("button");
-            startRouteButton.textContent = "Iniciar Rota";
-            startRouteButton.classList.add("start-button");  // Adicionando a classe CSS
-            startRouteButton.addEventListener('click', function() {
-                let url = "rotas-teste.html?id=" + index;
-                window.location.href = url;
-            });
-            routeElement.appendChild(startRouteButton);
+                    // Redirect to the page to display the route
+                    let url = "acompanhar-rota.html";
+                    window.location.href = url;
+                });
+                routeElement.appendChild(startRouteButton);
 
-            console.log(routeElement);  // Log 2
-            let deleteButton = document.createElement("button");
-            deleteButton.textContent = "Apagar Rota";
-            deleteButton.classList.add("delete-button");  // Adicionando a classe CSS
-            deleteButton.addEventListener('click', function() {
-                savedRoutes.splice(index, 1);
-                localStorage.setItem(userEmail, JSON.stringify(savedRoutes));
-                routeElement.remove();
-            });
-            routeElement.appendChild(deleteButton);
+                console.log(routeElement);
 
-            startRouteButton.addEventListener('click', function() {
-                localStorage.setItem('rotaAtual', JSON.stringify(route));
-                let url = "acompanhar-Rota.html";
-                window.location.href = url;
-            });
+                let deleteButton = document.createElement("button");
+                deleteButton.textContent = "Apagar Rota";
+                deleteButton.classList.add("delete-button");
+                deleteButton.addEventListener('click', function() {
+                    savedRoutes.splice(index, 1);
+                    localStorage.setItem(userEmail, JSON.stringify(savedRoutes));
+                    routeElement.remove();
+                });
+                routeElement.appendChild(deleteButton);
+
+                routesContainer.appendChild(routeElement);
+            console.log(routesContainer);
          
 
            
@@ -63,5 +64,12 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log(routesContainer);  // Log 3
         });
     }
-});
+       
+ 
+ 
+
+
+
+}); // Feche o eventListener 'DOMContentLoaded'
+
 

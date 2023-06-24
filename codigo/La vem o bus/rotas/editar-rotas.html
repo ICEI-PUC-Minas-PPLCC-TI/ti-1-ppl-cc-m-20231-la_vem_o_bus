@@ -32,28 +32,30 @@
     <main>
         <div id="map"></div>
         <section id="controls">
-            <h2>Controles</h2>
+          <h2>Controles</h2>
+          <div class="row">
             <button id="addWalkingRoute">Adicionar Rota a Pé</button>
+            <div class="color-picker">
+              <label for="busRouteColor">Cor da rota de Ônibus:</label>
+              <input type="color" id="busRouteColor" name="busRouteColor" value="#ff0000">
+            </div>
             <button id="addBusRoute">Adicionar Rota de Ônibus</button>
-
-
-            <label for="busRouteColor">Cor da rota de ônibus:</label>
-            <input type="color" id="busRouteColor" name="busRouteColor" value="#ff0000">
-
-            <button id="saveRoute">criar rota</button>
-            <button id="updateRoute">salvar </button>
-            <button id="clearMap">Limpar Mapa</button>
-
-                  
-
-
+          </div>
+          <div class="row">
+            <button id="saveRoute">Criar Rota</button>
+            <button id="updateRoute">Salvar edição</button>
+          </div>
+          <div class="row">
             <button id="removeLastRoute">Remover Última Rota</button>
-            
+            <button id="clearMap">Limpar Mapa</button>
+          </div>
+          <div class="row notification-buttons">
             <button id="addNotificationPoint">Adicionar Ponto de Notificação</button>
-
             <button id="removeNotificationPoint">Remover Ponto de Notificação</button>
-
+          </div>
         </section>
+        
+        
 
         <section id="routeList">
             <h2>Lista de Rotas</h2>
