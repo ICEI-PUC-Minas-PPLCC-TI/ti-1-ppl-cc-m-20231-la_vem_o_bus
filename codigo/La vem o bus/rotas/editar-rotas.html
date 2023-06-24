@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criador de Rotas de Ônibus</title>
+    <link rel="stylesheet" href="editar-rotas.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.min.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.js"></script>
+    <script src="https://unpkg.com/leaflet-geometryutil@0.7.1/dist/leaflet.geometryutil.js"></script>
+    <script src="editar-rotas.js" defer></script>
+    
+    
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+          <img src="/imagens do menu/logo.jpeg">
+        </div>
+        <h1>Criador de Rotas de Ônibus</h1>
+        <div class="button-group">
+          <button id="helpButton">Ajuda</button>
+          <button id="backToMenu"><a href="../minhas-rotas/MostrarRotas.html">Voltar ao menu de rotas</a></button>
+        </div>
+      </header>
+    <main>
+        <div id="map"></div>
+        <section id="controls">
+            <h2>Controles</h2>
+            <button id="addWalkingRoute">Adicionar Rota a Pé</button>
+            <button id="addBusRoute">Adicionar Rota de Ônibus</button>
+
+
+            <label for="busRouteColor">Cor da rota de ônibus:</label>
+            <input type="color" id="busRouteColor" name="busRouteColor" value="#ff0000">
+
+            <button id="saveRoute">criar rota</button>
+            <button id="updateRoute">salvar </button>
+            <button id="clearMap">Limpar Mapa</button>
+
+                  
+
+
+            <button id="removeLastRoute">Remover Última Rota</button>
+            
+            <button id="addNotificationPoint">Adicionar Ponto de Notificação</button>
+
+            <button id="removeNotificationPoint">Remover Ponto de Notificação</button>
+
+        </section>
+
+        <section id="routeList">
+            <h2>Lista de Rotas</h2>
+            <ul id="routes"></ul>
+            <h2>Lista de pontos usadas no trajeto</h2>
+            <ul id="lines"></ul>
+            <div id="routeDetails" class="details">
+              <p id="routeDescription"></p>
+            
+
+            </div>
+            <button id="editButton">Editar</button>
+            <button id="saveButton">salvar descrição</button>
+            <button id="nextButton">próximo ponto</button>            
+
+
+          </section>
+          
+          
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 - Todos os direitos reservados</p>
+    </footer>
+
+
+
+
+</body>
+
+</html>

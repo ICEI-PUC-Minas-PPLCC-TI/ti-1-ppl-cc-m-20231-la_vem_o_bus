@@ -7,7 +7,7 @@
     <title>Busão Fácil</title>
     <link rel="stylesheet" href="MostrarRotas.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
-    <script src="dados.js" defer></script>
+    <script src="MostrarRotas.js" defer></script>
 
 </head>
 
@@ -17,19 +17,21 @@
             <button onclick="location.href='../menu/menu.html'">Voltar ao Menu</button>
         </div>
         <div class="logo">
-            <h2>Minhas Rotas</h2>
+
+            <img src="../imagens do menu/logo.jpeg" alt="Logo do Busão Fácil">
 
         </div>
-       
+
     </header>
 
     <main>
+
         <section class="destaques">
-            <button class="butao" onclick="ordenarPorTempo()">Ordenar por Tempo</button>
-            <button class="butao" onclick="ordenarPorValor()">Ordenar por Valor</button>
-            <button class="butao" onclick="ordenarPorDestino()">Ordenar por Destino Final</button>
+            
+            <label for="opa">Pesquisar Rota por Nome:</label>
             <input type="texto" id="opa" oninput="procurar()">
             <h2>Suas Rotas</h2>
+
             <div class="rotas">
 
             </div>
@@ -38,7 +40,7 @@
             <div class="buttons">
                 <aside class="buttons">
                     <button onclick="location.href='../forum-sugestões/Forum.html'">Rotas no Forum</button>
-                    <button onclick="location.href='../rotas/minhas-rotas.html'">Nova Rota</button>
+                    <button onclick="location.href='../rotas/editar-rotas.html'">Nova Rota  <br> Editar rotas</button>
                     <button onclick="location.href='../forum-sugestôes/sugestões.html'">Configurações</button>
                 </aside>
             </div>

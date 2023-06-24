@@ -27,11 +27,8 @@ header .logo img {
     width: auto;
 }
 
-.search-bar input {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+
+
 .rota-link {
     display: inline-block;
     text-decoration: none;

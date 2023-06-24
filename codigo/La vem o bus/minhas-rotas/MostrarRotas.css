@@ -1,208 +1,190 @@
+/* General Resets */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-body {
-    background-color: #f8f9fa;
-}
-header {
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-
-    background-color: #343a40;
-}
-.logo {
-    text-align: center;
-    flex-grow: 1;
-    padding-right:20%;
-}
-.popup{
-    display: none;
-}
-.logo h2 {
-    font-size: 25px;
-    color: white;
 }
 header .logo img {
     height: 40px;
     width: auto;
 }
-.destaques .rotas .rota h2 {
-    color: rgb(33, 20, 220);
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
 }
-.destaques h2 {
-    text-align: center;
-    color :rgb(33,20,220);
-}
-.botao-voltar {
-    padding-right: 5%;
 
-}
-.butao {
-    padding: 0.5rem;
-    margin-top: 1rem;
-    font-size: 16px;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-.conteudo-rota button{
-    
-    padding: 0.5rem;
-    margin-top: 1rem;
-    font-size: 16px;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-.conteudo-rota button:hover {
-    background-color: #0056b3;
-}
-.conteudo-rota button:active {
-    background-color: #004085;
-}
-.botao-voltar button {
-
-    padding: 0.5rem;
-    font-size: 16px;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-.botao-voltar button:hover {
-    background-color: #0056b3;
-}
-.botao-voltar button:active {
-    background-color: #004085;
-}
-.destaques {
-
-    padding-top: 5%;
-}
-.rota {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    text-align: center;
-    padding: 2%;
-    width: 70%;
-    background-color: #ffffff;
-    border: 2px solid blue;
-    border-radius: 10%;
-  }
-.rota img {
-    justify-self: center;
-    max-width: 100%;
-    height: auto;
-}
-.rota-link {
-    display: inline-block;
-    text-decoration: none;
-    width: 100%;
-    box-sizing: border-box;
-}
-.rota-link img {
-    border: none;
-}
-main {
-    display: grid;
-    grid-template-columns: 7fr 3fr;
-    background-color: #f8f9fa;
-    max-height: 1000px;
-}
-.rotas {
-    align-items: center;
+/* Header styles */
+header {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    overflow-y: auto;
-    max-height: calc(90vh - 200px);
-    padding-top: 1%;
-    
-}
-.popup{
-    grid-column: span 2; 
-    width: 70%;
-    padding-left: 30%;
-    padding-top: 5%;
-}.right-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-}
-.buttons {
-
-    margin: 10%;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    height: auto;
-
-}
-.buttons button {
-    padding: 0.5rem;
-    font-size: 16px;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-.buttons button:hover {
-    background-color: #0056b3;
-}
-.buttons button:active {
-    background-color: #004085;
-}
-.botoes-container{
-    display: inline-block;
-    margin-right: 5px;
-}
-footer {
+    justify-content: space-between; /* Alinha os itens horizontalmente */
+    align-items: center; /* Alinha os itens verticalmente */
+    padding: 20px;
     background-color: #343a40;
-    color: #f8f9fa;
-    padding: 1rem;
-    text-align: center;
-    font-size: 14px;
-    grid-column: 1 / -1;
+    color: #fff;
+}
+
+header .botao-voltar {
+    order: 2; /* Posiciona o botão "Voltar ao Menu" à direita */
+}
+
+header .logo {
+    order: 1; /* Posiciona "Minhas Rotas" à esquerda */
+}
+
+header .botao-voltar button {
+    background-color: #007acc; /* Cor de fundo azul */
+    color: #fff; /* Cor do texto branco */
+    border: none; 
+    padding: 10px 15px; /* Espaço interno para o botão */
+    border-radius: 4px; /* Borda arredondada */
+    cursor: pointer; /* Cursor do mouse como ponteiro */
+    transition: background-color 0.3s; /* Transição suave de cores */
+}
+
+header .botao-voltar button:hover {
+    background-color: #005999; /* Cor de fundo azul mais escuro para o efeito de foco */
+}
+
+
+header .logo {
+    order: 1; /* Posiciona "Minhas Rotas" à esquerda */
+}
+
+header .logo h2 {
+    font-size: 24px;
+}
+
+/* Main Content styles */
+main {
+    padding: 20px;
+}
+
+section .destaques {
+    margin-bottom: 20px;
+}
+
+#opa {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.rotas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.rota {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: calc(50% - 10px);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.rota h2, .rota h3 {
+    margin-bottom: 15px;
+}
+
+.rota button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #007acc;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    max-width: 300px; /* New - limit button width */
+}
+
+.rota button:last-child {
+    margin-bottom: 0;
+}
+
+/* Right Section styles */
+.right-section {
+    margin-top: 20px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.buttons button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #007acc;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px; /* New - limit button width */
+}
+
+.buttons button:nth-child(2) {
+    background-color: #28a745; /* New - different color for second button */
+}
+
+aside.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Alinha os botões horizontalmente */
+    gap: 10px;
+}
+
+.rota .delete-button {
+    background-color: #ff4d4d; /* Cor de fundo vermelha */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Transição suave de cores */
+}
+
+.rota .delete-button:hover {
+    background-color: #e60000; /* Cor mais escura para o efeito de foco */
+}
+
+.rota .start-button {
+    background-color: #4dff4d; /* Cor de fundo verde */
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Transição suave de cores */
+}
+
+.rota .start-button:hover {
+    background-color: #00e600; /* Cor mais escura para o efeito de foco */
+}
+
+
+/* Footer styles */
+footer {
+    background-color: #343a40; /* Color updated */
+    color: #fff;
+    padding: 10px 0;
     position: fixed;
     bottom: 0;
     width: 100%;
-}
-footer p {
-    margin: 0;
-}
-.destaques{
     text-align: center;
-    align-items: center;
 }
-#opa {
-    width: 200px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: border-color 0.3s;
-  }
-  
-  #opa:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  }
+/* Responsive */
+@media (max-width: 768px) {
+    .rotas {
+        flex-direction: column;
+    }
+
+    .rota {
+        width: 100%;
+    }
+}
