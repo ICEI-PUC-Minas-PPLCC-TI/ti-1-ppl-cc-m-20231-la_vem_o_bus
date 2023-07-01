@@ -19,11 +19,11 @@ header {
     align-items: center;
     padding: 1rem;
     grid-column: 1 / -1;
-    background-color: #343a40;
+    background-color: #540D6E;
 }
 
 header .logo img {
-    height: 40px;
+    height: 80px;
     width: auto;
 }
 
@@ -81,26 +81,30 @@ aside {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-}
-
-.buttons button {
+    background-color: #0EAD69;
+    padding: 1rem;
+    border-radius: 5px;
+  }
+  
+  .buttons button {
     padding: 0.5rem;
     font-size: 16px;
     color: white;
-    background-color: #007bff;
-    border: none;
+    background-color: transparent;
+    border: 2px solid white;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-}
-
-.buttons button:hover {
-    background-color: #0056b3;
-}
-
-.buttons button:active {
-    background-color: #004085;
-}
+  }
+  
+  .buttons button:hover {
+    background-color: white;
+    color: #0EAD69;
+  }
+  
+  .buttons button:active {
+    background-color: #3BCEAC;
+  }
 
 .forum {
     background-color: #e9ecef;
@@ -132,7 +136,7 @@ aside {
 .forum-link {
     font-size: 40px; 
     font-weight: bold;
-    color: #007bff;
+    color: #0EAD69;
     text-decoration: none;
 }
 
@@ -177,13 +181,13 @@ aside {
 }
 
 .meu-busao li:hover {
-    background-color: #2d63ed;
+    background-color: #0EAD69;
     color: #fff;
 }
 
 
 footer {
-    background-color: #343a40;
+    background-color: #540D6E;
     color: #f8f9fa;
     padding: 1rem;
     text-align: center;
