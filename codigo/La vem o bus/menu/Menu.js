@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
           li.dataset.routeIndex = i;
           li.addEventListener('click', () => {
             localStorage.setItem('selectedRouteIndex', li.dataset.routeIndex);
-            window.location.href = '../rotas/editar-rotas.html';
+            window.location.href = '../minhas-rotas/MostrarRotas.html';
           });
   
           meuBusaoList.appendChild(li);

@@ -1,207 +1,274 @@
-// Caso precise limpar o LocalStorage, usar o código:
-// localStorage.clear();
+document.addEventListener('DOMContentLoaded', function () {
+  // Função para verificar se o usuário está logado
+  function isLoggedIn() {
+    const email = localStorage.getItem('email');
+    return email || null;
+  }
 
-const data = {
-  "commentsListSelector": ".comments",
-  "commentSelector": ".comment",
-  "authorSelector": ".author",
-  "dateSelector": ".date",
-  "textSelector": ".text",
-  "likeButtonSelector": ".like-button",
-  "likeCountSelector": ".like-count",
-  "replyButtonSelector": ".reply-button",
-  "commentFormSelector": "#comment-form",
-  "commentInputSelector": "#comment",
-  "deleteButtonSelector": ".delete-button"
-};
-
-
-// Função para verificar se o usuário está logado
-function isLoggedIn() {
-  const userEmail = localStorage.getItem("userEmail");
-  return userEmail !== null;
-}
-
-// Função para exibir as rotas do usuário no fórum
-function exibirRotasSalvasNoForum() {
-  const userEmail = isLoggedIn(); // Obtém o email do usuário logado
+  // Verifica se o usuário está logado
+  let userEmail = isLoggedIn();
 
   if (userEmail) {
-    const savedRoutesJSON = localStorage.getItem(userEmail);
-    if (savedRoutesJSON) {
-      const savedRoutes = JSON.parse(savedRoutesJSON);
-      const selectRota = document.querySelector("#routes");
+    // Obtém as rotas salvas do usuário logado
+    let savedRoutes = JSON.parse(localStorage.getItem(userEmail)) || [];
 
-      // Limpa as rotas existentes no select
-      selectRota.innerHTML = "";
+    // Obtém o elemento select das rotas
+    let routesSelect = document.getElementById('routes');
 
-      // Adiciona as rotas salvas como opções no select
-      savedRoutes.forEach((savedRoute) => {
-        const option = document.createElement("option");
-        option.value = savedRoute.name;
-        option.text = savedRoute.name;
-        selectRota.appendChild(option);
-      });
-    }
+    // Adiciona as opções de rota ao select
+    savedRoutes.forEach((route, index) => {
+      let option = document.createElement('option');
+      option.value = index;
+      option.text = route.name;
+      routesSelect.appendChild(option);
+    });
+  }
+
+  // Obtém as publicações salvas no armazenamento local
+  let savedPublications = JSON.parse(localStorage.getItem('publications')) || [];
+
+  // Adiciona as publicações existentes ao fórum
+  savedPublications.forEach((publication) => {
+    addPublication(publication);
+  });
+});
+
+// Função para publicar uma rota no fórum
+function publishRoute(event) {
+  event.preventDefault();
+
+  // Obtém os valores dos campos de entrada
+  let routeNameInput = document.getElementById('route-name');
+  let routeDescriptionInput = document.getElementById('route-description');
+  let routesSelect = document.getElementById('routes');
+
+  // Obtém o índice da rota selecionada
+  let routeIndex = routesSelect.value;
+
+  // Obtém o email do usuário logado
+  let userEmail = localStorage.getItem('email');
+  let savedRoutes = JSON.parse(localStorage.getItem(userEmail)) || [];
+
+  // Obtém a rota selecionada
+  let selectedRoute = savedRoutes[routeIndex];
+
+  // Cria um objeto de publicação com os dados fornecidos
+  let publication = {
+    routeName: routeNameInput.value,
+    routeDescription: routeDescriptionInput.value,
+    route: JSON.parse(JSON.stringify(selectedRoute)), // Cria uma cópia profunda da rota
+    likes: 0,
+    comments: [],
+  };
+
+  // Adiciona a publicação ao fórum
+  addPublication(publication);
+
+  // Salva a publicação no armazenamento local
+  let savedPublications = JSON.parse(localStorage.getItem('publications')) || [];
+  savedPublications.push(publication);
+  localStorage.setItem('publications', JSON.stringify(savedPublications));
+
+  // Limpa os campos de entrada do formulário
+  routeNameInput.value = '';
+  routeDescriptionInput.value = '';
+  routesSelect.selectedIndex = 0;
+}
+
+// Função para adicionar uma publicação ao fórum
+function addPublication(publication) {
+  // Obtém o elemento que contém as publicações
+  let publicationsContainer = document.querySelector('.publications');
+
+  // Cria um elemento de publicação
+  let publicationElement = document.createElement('div');
+  publicationElement.classList.add('publication');
+
+  // Adiciona o título da rota à publicação
+  let titleElement = document.createElement('h3');
+  titleElement.textContent = publication.routeName;
+  publicationElement.appendChild(titleElement);
+
+  // Adiciona a descrição da rota à publicação
+  let descriptionElement = document.createElement('p');
+  descriptionElement.textContent = publication.routeDescription;
+  publicationElement.appendChild(descriptionElement);
+
+  // Adiciona o botão "Iniciar Rota" à publicação
+  let startButton = document.createElement('button');
+  startButton.textContent = 'Iniciar Rota';
+  startButton.addEventListener('click', function () {
+    // Armazena a rota selecionada no armazenamento local
+    localStorage.setItem('selectedRoute', JSON.stringify(publication.route));
+    // Redireciona para a página "acompanhar-rota.html"
+    location.href = '../minhas-rotas/acompanhar-rota.html';
+  });
+  publicationElement.appendChild(startButton);
+
+  // Container dos likes
+  let likesContainer = document.createElement('div');
+  likesContainer.classList.add('likes-container');
+
+  // Botão de like
+  let likeButton = document.createElement('button');
+  likeButton.classList.add('heart-button', 'outline');
+  likeButton.addEventListener('click', toggleLike);
+  let likeIcon = document.createElement('i');
+  likeIcon.classList.add('fas', 'fa-heart');
+  likeButton.appendChild(likeIcon);
+
+  // Contador de likes
+  let likesCount = document.createElement('span');
+  likesCount.classList.add('likes-count');
+  likesCount.textContent = publication.likes;
+
+  // Adiciona o botão de like e o contador ao container
+  likesContainer.appendChild(likeButton);
+  likesContainer.appendChild(likesCount);
+
+  // Adiciona o container de likes à publicação
+  publicationElement.appendChild(likesContainer);
+
+  // Seção de comentários
+  let commentsSection = document.createElement('div');
+  commentsSection.classList.add('comments-section');
+
+  // Título dos comentários
+  let commentsHeading = document.createElement('h4');
+  commentsHeading.textContent = 'Comentários';
+  commentsSection.appendChild(commentsHeading);
+
+  // Lista de comentários
+  let commentsList = document.createElement('ul');
+  commentsList.classList.add('comments-list');
+  commentsSection.appendChild(commentsList);
+
+  // Formulário de comentário
+  let commentForm = document.createElement('form');
+  commentForm.addEventListener('submit', publishComment);
+
+  let commentInput = document.createElement('input');
+  commentInput.type = 'text';
+  commentInput.classList.add('comment-input');
+  commentInput.placeholder = 'Digite um comentário...';
+  commentForm.appendChild(commentInput);
+
+  let commentButton = document.createElement('button');
+  commentButton.type = 'submit';
+  commentButton.textContent = 'Publicar';
+  commentForm.appendChild(commentButton);
+
+  // Adiciona o formulário de comentário à seção de comentários
+  commentsSection.appendChild(commentForm);
+
+  // Adiciona os comentários existentes à publicação
+  publication.comments.forEach((comment) => {
+    addComment(comment, commentsList);
+  });
+
+  // Adiciona a seção de comentários à publicação
+  publicationElement.appendChild(commentsSection);
+
+  // Botão de exclusão da publicação
+  let deleteButton = document.createElement('button');
+  deleteButton.textContent = 'Excluir Publicação';
+  deleteButton.addEventListener('click', function () {
+    deletePublication(publicationElement);
+  });
+  publicationElement.appendChild(deleteButton);
+
+  // Adiciona a publicação ao container de publicações
+  publicationsContainer.appendChild(publicationElement);
+}
+
+// Função para alternar o estado de like
+function toggleLike(event) {
+  let likeButton = event.target;
+  let publication = likeButton.closest('.publication');
+  let likesCount = publication.querySelector('.likes-count');
+
+  if (likeButton.classList.contains('outline')) {
+    likeButton.classList.remove('outline');
+    likeButton.classList.add('filled');
+    publication.likes = 1;
+  } else {
+    likeButton.classList.remove('filled');
+    likeButton.classList.add('outline');
+    publication.likes = 0;
+  }
+
+  likesCount.textContent = publication.likes;
+}
+
+// Função para publicar um comentário
+function publishComment(event) {
+  event.preventDefault();
+
+  const commentInput = event.target.querySelector('.comment-input');
+  const commentText = commentInput.value;
+
+  if (commentText.trim() !== '') {
+    const publication = commentInput.closest('.publication');
+    const commentsList = publication.querySelector('.comments-list');
+
+    const userEmail = localStorage.getItem('email');
+    const commenter = userEmail ? userEmail.split('@')[0] : 'Usuário Anônimo';
+
+    const comment = {
+      commenter: commenter,
+      comment: commentText,
+    };
+
+    addComment(comment, commentsList);
+
+    commentInput.value = '';
   }
 }
 
-// Aguarda o evento DOMContentLoaded para garantir que o documento foi completamente carregado
-document.addEventListener("DOMContentLoaded", function() {
-  const formulario = document.querySelector(data.commentFormSelector);
-  const listaComentarios = document.querySelector(data.commentsListSelector);
-  const selectRota = document.querySelector("#routes");
 
-  // Função para exibir um novo comentário
-  function exibirComentario(comentario, parentElement) {
-    const novoComentario = document.createElement("div");
-    novoComentario.classList.add(data.commentSelector.slice(1));
-    novoComentario.innerHTML = `
-      <p class="${data.authorSelector.slice(1)}">${comentario.autor}</p>
-      <p class="${data.dateSelector.slice(1)}">${comentario.data}</p>
-      <p class="${data.textSelector.slice(1)}">${comentario.texto}</p>
-      <button class="${data.likeButtonSelector.slice(1)}">❤️</button>
-      <span class="${data.likeCountSelector.slice(1)}">${comentario.curtidas}</span>
-      <button class="${data.replyButtonSelector.slice(1)}">Responder</button>
-      <button class="${data.deleteButtonSelector.slice(1)}">Excluir</button>
-    `;
+// Função para adicionar um comentário à lista de comentários
+function addComment(comment, commentsList) {
+  const commentItem = document.createElement('li');
+  commentItem.classList.add('comment-box');
 
-    const likeButton = novoComentario.querySelector(data.likeButtonSelector);
-    const likeCount = novoComentario.querySelector(data.likeCountSelector);
+  const commenter = document.createElement('span');
+  commenter.classList.add('commenter');
+  commenter.textContent = comment.commenter;
 
-    // Manipulador de evento para curtir um comentário
-    likeButton.addEventListener("click", () => {
-      let currentLikes = parseInt(likeCount.textContent);
-      const isLiked = likeButton.classList.contains("liked");
+  const commentContent = document.createElement('p');
+  commentContent.classList.add('comment-content');
+  commentContent.textContent = comment.comment;
 
-      if (isLiked) {
-        currentLikes--;
-        likeButton.classList.remove("liked");
-      } else {
-        currentLikes++;
-        likeButton.classList.add("liked");
-      }
+  commentItem.appendChild(commenter);
+  commentItem.appendChild(commentContent);
 
-      likeCount.textContent = currentLikes;
-    });
-
-    const replyButton = novoComentario.querySelector(data.replyButtonSelector);
-    replyButton.addEventListener("click", () => {
-      mostrarFormularioResposta(comentario, novoComentario);
-    });
-
-    const deleteButton = novoComentario.querySelector(data.deleteButtonSelector);
-    deleteButton.addEventListener("click", () => {
-      deletarComentario(comentario, parentElement, novoComentario);
-    });
-
-    parentElement.appendChild(novoComentario);
-  }
-
-  // Função para exibir o formulário de resposta a um comentário
-  function mostrarFormularioResposta(comentarioPai, parentElement) {
-    const formularioResposta = document.createElement("form");
-    formularioResposta.classList.add(data.commentFormSelector.slice(1));
-    formularioResposta.innerHTML = `
-      <input type="text" class="${data.commentInputSelector.slice(1)}" placeholder="Escreva uma resposta">
-      <button type="submit">Responder</button>
-    `;
-
-    // Manipulador de evento para submeter a resposta ao comentário
-    formularioResposta.addEventListener("submit", (evento) => {
-      evento.preventDefault();
-
-      const respostaInput = formularioResposta.querySelector(data.commentInputSelector);
-      const textoResposta = respostaInput.value;
-
-      if (textoResposta.trim() === "") {
-        alert("Por favor, insira uma resposta válida.");
-        return;
-      }
-
-      const resposta = {
-        autor: "Usuário",
-        data: new Date().toLocaleDateString(),
-        texto: textoResposta,
-        curtidas: 0
-      };
-
-      exibirComentario(resposta, parentElement);
-
-      respostaInput.value = "";
-      formularioResposta.remove();
-    });
-
-    parentElement.appendChild(formularioResposta);
-  }
-
-  // Função para deletar um comentário
-  function deletarComentario(comentario, parentElement, elementoComentario) {
-    if (comentario.autor !== "Usuário") {
-      alert("Você só pode excluir seus próprios comentários.");
-      return;
-    }
-
-    parentElement.removeChild(elementoComentario);
-    removerComentario(comentario); // Remover o comentário do localStorage
-  }
-
-  // Manipulador de evento para submeter um novo comentário
-  formulario.addEventListener("submit", (evento) => {
-    evento.preventDefault();
-
-    const comentarioInput = formulario.querySelector(data.commentInputSelector);
-    const textoComentario = comentarioInput.value;
-
-    if (textoComentario.trim() === "") {
-      alert("Por favor, insira um comentário válido.");
-      return;
-    }
-
-    const comentario = {
-      autor: "Usuário",
-      data: new Date().toLocaleDateString(),
-      texto: textoComentario,
-      curtidas: 0,
-      rota: selectRota.value // Adicionando a rota selecionada ao comentário
-    };
-
-    exibirComentario(comentario, listaComentarios);
-    comentarioInput.value = "";
-
-    salvarComentario(comentario); // Salvar o novo comentário no localStorage
+  // Botão de exclusão do comentário
+  let deleteButton = document.createElement('button');
+  deleteButton.textContent = 'Excluir Comentário';
+  deleteButton.addEventListener('click', function () {
+    deleteComment(commentItem);
   });
+  commentItem.appendChild(deleteButton);
 
-  // Função para salvar um comentário no localStorage
-  function salvarComentario(comentario) {
-    let comentarios = carregarComentarios();
-    comentarios.push(comentario);
-    localStorage.setItem("comentarios", JSON.stringify(comentarios));
+  commentsList.appendChild(commentItem);
+}
+
+// Função para excluir um comentário
+function deleteComment(commentElement) {
+  let commentsList = commentElement.parentNode;
+  commentsList.removeChild(commentElement);
+}
+
+// Função para excluir uma publicação
+function deletePublication(publicationElement) {
+  let publicationsContainer = publicationElement.parentNode;
+  publicationsContainer.removeChild(publicationElement);
+
+  let savedPublications = JSON.parse(localStorage.getItem('publications')) || [];
+  let publicationIndex = savedPublications.findIndex((p) => p.routeName === publicationElement.querySelector('h3').textContent);
+
+  if (publicationIndex !== -1) {
+    savedPublications.splice(publicationIndex, 1);
+    localStorage.setItem('publications', JSON.stringify(savedPublications));
   }
-
-  // Função para carregar os comentários do localStorage
-  function carregarComentarios() {
-    let comentarios = localStorage.getItem("comentarios");
-    if (comentarios) {
-      return JSON.parse(comentarios);
-    } else {
-      return [];
-    }
-  }
-
-  // Função para remover um comentário do localStorage
-  function removerComentario(comentario) {
-    let comentarios = carregarComentarios();
-    comentarios = comentarios.filter((c) => c !== comentario);
-    localStorage.setItem("comentarios", JSON.stringify(comentarios));
-  }
-
-  // Carregar os comentários existentes do localStorage ao carregar a página
-  const comentarios = carregarComentarios();
-  comentarios.forEach((comentario) => {
-    exibirComentario(comentario, listaComentarios);
-  });
-
-  // Exibir as rotas salvas no fórum ao carregar a página
-  exibirRotasSalvasNoForum();
-});
+}

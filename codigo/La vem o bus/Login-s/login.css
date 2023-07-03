@@ -17,7 +17,7 @@ header {
     justify-content: space-between;
  
     grid-column: 1 / -1;
-    background-color: #343a40;
+    background-color: #540D6E;
     color: #f8f9fa;
 }
 header {
@@ -32,7 +32,7 @@ header img {
 /* botão de ver usuário*/
 
 .user-profiles-btn {
-  background-color: #007bff;
+  background-color: #2fa68d;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -87,7 +87,7 @@ main {
     padding: 0.5rem;
     font-size: 16px;
     color: white;
-    background-color: #007bff;
+    background-color: #2fa68d;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -236,7 +236,7 @@ main {
       
 
 footer {
-    background-color: #343a40;
+    background-color: #540D6E;
     color: #f8f9fa;
     padding: 1rem;
     text-align: center;

@@ -5,38 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fórum - Meu Transporte</title>
   <link rel="stylesheet" href="forum.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 <body>
-    <header>
-        <img src="../imagens do menu/logo.jpeg" alt="Meu Transporte">
-        <div class="search-bar">
-            <input type="text" placeholder="Pesquisar...">
-            <button onclick="location.href='../menu/Menu.html'">Voltar ao menu</button>
-        </div>
-    </header>
-    <div class="main-container">
+  <header>
+    <img src="../imagens do menu/lavemobuslogo2.png" alt="Lá Vem o Bus" class="logo">
+    <div class="search-bar">
+      <input type="text" placeholder="Pesquisar...">
+      <button onclick="location.href='../menu/Menu.html'">Voltar ao menu</button>
+    </div>
+  </header>
+  <div class="main-container">
     <main>
-        <div class="container">
-            <section class="forum">
-                <h2>Suas rotas publicadas no fórum:</h2>
-                <form>
-                  <label for="comment">Nome:</label>
-                  <textarea id="comment" name="comment" required></textarea>
-                  <div for="descricao"><b>Descrição:</b></div>
-                  <textarea id="descricao" name="descricao" required></textarea>
-                  <label for="routes">Selecione uma rota:</label>
-                  <select id="routes"></select>
-                  <button type="submit">Postar</button>
-                  <button onclick="compartilharRota()">Compartilhar Rota</button>
-                </form>
-                <div class="comments"></div>
-            </section>
-        </div>
+      <div class="container">
+        <section class="forum">
+          <h2>Suas rotas publicadas no fórum:</h2>
+          <form onsubmit="publishRoute(event)">
+            <label for="route-name">Nome:</label>
+            <input type="text" id="route-name" required>
+            <label for="route-description">Descrição:</label>
+            <textarea id="route-description" required></textarea>
+            <label for="routes">Selecione uma rota:</label>
+            <select id="routes"></select>
+            <button type="submit">Publicar Rota</button>
+          </form>
+          <div class="publications"></div>
+        </section>
+      </div>
     </main>
   </div>
-    <footer>
-        <p>© 2023 Todos os direitos reservados.</p>
-    </footer>
-    <script src="forum.js"></script>
+  <footer>
+    <p>© Lá Vem o Bus 2023. Todos os direitos reservados.</p>
+  </footer>
+  <script src="forum.js"></script>
 </body>
 </html>

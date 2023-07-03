@@ -27,15 +27,24 @@ header .logo img {
     width: auto;
 }
 
+header .title {
+    color: #fff;
+    font-size: 40px;
+    text-align: center;
+    grid-column: 1 / -1;
+    margin: 0 auto;
+}
+
+
 .rota-link {
     display: inline-block;
     text-decoration: none;
-    width: 100%;
+    width: 100%; 
     box-sizing: border-box;
 }
 
 .rota-link img {
-    border: none;
+    border: none; 
 }
 
 main {
@@ -58,8 +67,8 @@ main {
 .rotas img {
     width: 80%;
     height: auto;
-    max-height: 200px;
-    object-fit: cover;
+    max-height: 200px; 
+    object-fit: cover; 
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -109,11 +118,12 @@ aside {
     padding: 1rem;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%; 
 }
 
 .forum p {
     font-family: 'Roboto', sans-serif;
-    font-size: 30px;
+    font-size: 30px; 
     font-weight: 500;
     color: #343a40;
     margin-bottom: 0.5rem;
@@ -121,7 +131,7 @@ aside {
 
 .forum-box {
     display: inline-block;
-    padding: 70px 25px;
+    padding: 70px 25px; 
     background-color: #f8f9fa;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -131,7 +141,7 @@ aside {
 }
 
 .forum-link {
-    font-size: 40px;
+    font-size: 40px; 
     font-weight: bold;
     color: #0EAD69;
     text-decoration: none;
@@ -194,4 +204,14 @@ footer {
 
 footer p {
     margin: 0;
+}
+
+.footer-left {
+    text-align: left;
+    color: #fff;
+}
+
+.footer-right {
+    text-align: right;
+    color: #fff;
 }
