@@ -17,12 +17,12 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: #343a40;
+  background-color: #540D6E;
   color: #fff;
 }
 
 header .logo img {
-  height: 40px;
+  height: 60px;
   width: auto;
 }
 
@@ -40,7 +40,7 @@ header .button-group a {
 }
 
 header .button-group button {
-  background-color: #007acc;
+  background-color: #3BCEAC;
   color: #fff;
   border: none;
   padding: 10px 15px;
@@ -93,7 +93,7 @@ section#controls .row {
 }
 
 section#controls .row button {
-  background-color: #007acc;
+  background-color: #3BCEAC;
   color: #fff;
   border: none;
   padding: 10px 15px;
@@ -107,16 +107,16 @@ section#controls .row:nth-child(odd) button {
 }
 
 section#controls .row:nth-child(even) button {
-  background-color: #ffc107;
+  background-color: #FFD23F;
 }
 
 section#controls .notification-buttons button {
-  background-color: #dc3545;
+  background-color: #EE4266;
   color: #fff;
 }
 
 section#controls .route-buttons button:nth-child(2) {
-  background-color: #007acc;
+  background-color: #3BCEAC;
 }
 
 section#controls .color-picker {
@@ -162,7 +162,7 @@ section#routeList .details {
 }
 
 section#routeList button {
-  background-color: #007acc;
+  background-color: #3BCEAC;
   color: #fff;
   border: none;
   padding: 10px 15px;
@@ -174,7 +174,7 @@ section#routeList button {
 }
 
 section#routeList button#editButton {
-  background-color: #ffc107;
+  background-color: #FFD23F;
 }
 
 section#routeList button#saveButton {
@@ -195,7 +195,7 @@ section#routeList ul#lines {
 
 /* Footer styles */
 footer {
-  background-color: #343a40;
+  background-color: #540D6E;
   color: #fff;
   padding: 10px 0;
   text-align: center;

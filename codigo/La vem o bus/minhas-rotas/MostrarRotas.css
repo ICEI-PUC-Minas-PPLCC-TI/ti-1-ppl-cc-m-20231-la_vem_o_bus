@@ -5,7 +5,7 @@
     padding: 0;
 }
 header .logo img {
-    height: 40px;
+    height: 60px;
     width: auto;
 }
 body {
@@ -20,7 +20,7 @@ header {
     justify-content: space-between; /* Alinha os itens horizontalmente */
     align-items: center; /* Alinha os itens verticalmente */
     padding: 20px;
-    background-color: #343a40;
+    background-color: #540D6E;
     color: #fff;
 }
 
@@ -33,7 +33,7 @@ header .logo {
 }
 
 header .botao-voltar button {
-    background-color: #007acc; /* Cor de fundo azul */
+    background-color: #3BCEAC; /* Cor de fundo azul */
     color: #fff; /* Cor do texto branco */
     border: none; 
     padding: 10px 15px; /* Espaço interno para o botão */
@@ -97,7 +97,7 @@ section .destaques {
     border: none;
     border-radius: 4px;
     color: #fff;
-    background-color: #007acc;
+    background-color: #3BCEAC;
     cursor: pointer;
     width: 100%;
     margin-bottom: 10px;
@@ -124,14 +124,14 @@ section .destaques {
     border: none;
     border-radius: 4px;
     color: #fff;
-    background-color: #007acc;
+    background-color: #3BCEAC;
     cursor: pointer;
     width: 100%;
     max-width: 300px; /* New - limit button width */
 }
 
 .buttons button:nth-child(2) {
-    background-color: #28a745; /* New - different color for second button */
+    background-color: #0EAD69; /* New - different color for second button */
 }
 
 aside.buttons {
@@ -155,7 +155,7 @@ aside.buttons {
 }
 
 .rota .start-button {
-    background-color: #4dff4d; /* Cor de fundo verde */
+    background-color: #0EAD69; /* Cor de fundo verde */
     color: black;
     border: none;
     padding: 10px 15px;
@@ -164,7 +164,7 @@ aside.buttons {
 }
 
 .rota .start-button:hover {
-    background-color: #00e600; /* Cor mais escura para o efeito de foco */
+    background-color: #0EAD69; /* Cor mais escura para o efeito de foco */
 }
 
 

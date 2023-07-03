@@ -77,21 +77,16 @@ document.addEventListener("DOMContentLoaded", async function() {
         
         // Adicionar pontos de notificação
         rotaAtual.notificationPoints.forEach(np => {
-            let marker = L.marker([np.lat, np.lng]).addTo(map);
+            let marker = L.marker([np.lat, np.lng], { icon: notificationIcon }).addTo(map);
             marker.bindPopup("Ponto de Notificação");
+            notificationPoints.push(np);
         });
-        
-      
     };
 
     console.log("Desenhando rotas...");
     await drawRoutes();
 
-    
-
-  //Parte 2 do código envolvendo ponto de notificação e localização!
-
-    //GPS
+    // GPS
     if (navigator.geolocation) {
         const options = {
             enableHighAccuracy: true,
@@ -104,7 +99,8 @@ document.addEventListener("DOMContentLoaded", async function() {
             const longitude = position.coords.longitude;
 
             // Atualize a posição do usuário no mapa ou realize outras ações necessárias
-            // Exemplo: addUserLocation(latitude, longitude);
+            // Exemplo: updateUserLocation(latitude, longitude);
+            updateUserLocation(latitude, longitude);
         };
 
         const errorCallback = function (error) {
@@ -116,107 +112,89 @@ document.addEventListener("DOMContentLoaded", async function() {
         console.error('Geolocation is not supported by this browser.');
     }
 
-
-
-
     // Ícone personalizado para o marcador de localização do usuário
-    // Definindo o ícone do usuário
-const userIcon = L.icon({
-    iconUrl: '../rotas/imagens/posicao.png',
-    iconSize: [38, 38],
-    iconAnchor: [19, 38],
-    popupAnchor: [0, -38]
-});
+    const userIcon = L.icon({
+        iconUrl: '../rotas/imagens/posicao.png',
+        iconSize: [38, 38],
+        iconAnchor: [19, 38],
+        popupAnchor: [0, -38]
+    });
 
-// Definindo o marcador de localização do usuário
-let userLocationMarker = L.marker([0, 0], { icon: userIcon }).addTo(map);
-userLocationMarker.bindPopup('Você está aqui');
+    // Definindo o marcador de localização do usuário
+    let userLocationMarker = L.marker([0, 0], { icon: userIcon }).addTo(map);
+    userLocationMarker.bindPopup('Você está aqui');
 
-// Função para atualizar a posição do usuário no mapa
-function updateUserLocation(lat, lng) {
-    userLocationMarker.setLatLng([lat, lng]);
-    userLocationMarker.getPopup().setContent('Você está aqui');
-    userLocationMarker.openPopup();
-}
+    // Função para atualizar a posição do usuário no mapa
+    function updateUserLocation(lat, lng) {
+        userLocationMarker.setLatLng([lat, lng]);
+        userLocationMarker.getPopup().setContent('Você está aqui');
+        userLocationMarker.openPopup();
+    }
 
-// Se a geolocalização estiver disponível, pegue a posição atual do usuário
-if (navigator.geolocation) {
-    const options = {
-        enableHighAccuracy: true,
-        timeout: 2000,
-        maximumAge: 0
-    };
+    // Se a geolocalização estiver disponível, pegue a posição atual do usuário
+    if (navigator.geolocation) {
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 2000,
+            maximumAge: 0
+        };
 
-    const successCallback = function (position) {
-        updateUserLocation(position.coords.latitude, position.coords.longitude);
-    };
+        const successCallback = function (position) {
+            updateUserLocation(position.coords.latitude, position.coords.longitude);
+        };
 
-    const errorCallback = function (error) {
-        console.error('Error getting location', error);
-    };
+        const errorCallback = function (error) {
+            console.error('Error getting location', error);
+        };
 
-    // Inicie a observação da localização do usuário
-    const watchId = navigator.geolocation.watchPosition(successCallback, errorCallback, options);
-} else {
-    console.error('Geolocation is not supported by this browser.');
-}
+        // Inicie a observação da localização do usuário
+        const watchId = navigator.geolocation.watchPosition(successCallback, errorCallback, options);
+    } else {
+        console.error('Geolocation is not supported by this browser.');
+    }
 
-let notificationPoints = [];  
+    const notificationIcon = L.icon({
+        iconUrl: '../rotas/imagens/pin.png',
+        iconSize: [38, 38],
+        iconAnchor: [19, 38],
+        popupAnchor: [0, -38]
+    });
 
-const notificationIcon = L.icon({
-    iconUrl: '../rotas/imagens/pin.png',
-    iconSize: [38, 38],
-    iconAnchor: [19, 38],
-    popupAnchor: [0, -38]
-});
-
-   
-
-
-    setInterval(() => {             // lida com a notificação
+    setInterval(() => {
         if (notificationPoints.length > 0) {
             navigator.geolocation.getCurrentPosition((position) => {
                 const userLatLng = L.latLng(position.coords.latitude, position.coords.longitude);
-    
+
                 notificationPoints.forEach((notificationLatLng, index) => {
                     const notificationPoint = L.latLng(notificationLatLng.lat, notificationLatLng.lng);
-                    if (userLatLng.distanceTo(notificationPoint) <= 400) {
-                        alert('você está a 40 metros do ponto ')
+                    if (userLatLng.distanceTo(notificationPoint) <= 40) {
+                        alert('Você está a 40 metros do ponto');
                         const audio = new Audio('sounds/BOLSO.mp3');
                         audio.play();
                         
-                        
-                        // Remove the notificationPoint from the map
-                      
+                        // Remova o notificationPoint do mapa
+                        map.removeLayer(notificationMarkers[index]);
                         
                         const userEmail = isLoggedIn();
                         if (userEmail) {
                             const savedRoutesJSON = localStorage.getItem(userEmail);
                             const savedRoutes = savedRoutesJSON ? JSON.parse(savedRoutesJSON) : [];
-    
+
                             savedRoutes.forEach((savedRoute) => {
                                 const notificationPointIndex = savedRoute.notificationPoints.findIndex(np => np.lat === notificationLatLng.lat && np.lng === notificationLatLng.lng);
                                 if (notificationPointIndex !== -1) {
                                     savedRoute.notificationPoints.splice(notificationPointIndex, 1);
                                 }
                             });
-    
+
                             localStorage.setItem(userEmail, JSON.stringify(savedRoutes));
                         }
-    
-                        // Remove the notificationPoint from the local array
+
+                        // Remova o notificationPoint do array local
                         notificationPoints.splice(index, 1);
                     }
                 });
             });
         }
     }, 1000);
-    
-
-
-
 });
-
-
-
-

@@ -12,7 +12,6 @@
         <div class="search-bar">
             <input type="text" placeholder="Pesquisar...">
             <button onclick="location.href='../menu/Menu.html'">Voltar ao menu</button>
-
         </div>
     </header>
     <div class="main-container">
@@ -21,18 +20,17 @@
             <section class="forum">
                 <h2>Suas rotas publicadas no fórum:</h2>
                 <form>
-                
                   <label for="comment">Nome:</label>
                   <textarea id="comment" name="comment" required></textarea>
                   <div for="descricao"><b>Descrição:</b></div>
                   <textarea id="descricao" name="descricao" required></textarea>
+                  <label for="routes">Selecione uma rota:</label>
+                  <select id="routes"></select>
                   <button type="submit">Postar</button>
+                  <button onclick="compartilharRota()">Compartilhar Rota</button>
                 </form>
-                <div class="comments">
-                  
-                  </div>
-                </div>
-              </section>
+                <div class="comments"></div>
+            </section>
         </div>
     </main>
   </div>

@@ -10,15 +10,47 @@ const data = {
   "likeButtonSelector": ".like-button",
   "likeCountSelector": ".like-count",
   "replyButtonSelector": ".reply-button",
-  "commentFormSelector": ".comment-form",
-  "commentInputSelector": ".comment-input",
+  "commentFormSelector": "#comment-form",
+  "commentInputSelector": "#comment",
   "deleteButtonSelector": ".delete-button"
 };
 
+
+// Função para verificar se o usuário está logado
+function isLoggedIn() {
+  const userEmail = localStorage.getItem("userEmail");
+  return userEmail !== null;
+}
+
+// Função para exibir as rotas do usuário no fórum
+function exibirRotasSalvasNoForum() {
+  const userEmail = isLoggedIn(); // Obtém o email do usuário logado
+
+  if (userEmail) {
+    const savedRoutesJSON = localStorage.getItem(userEmail);
+    if (savedRoutesJSON) {
+      const savedRoutes = JSON.parse(savedRoutesJSON);
+      const selectRota = document.querySelector("#routes");
+
+      // Limpa as rotas existentes no select
+      selectRota.innerHTML = "";
+
+      // Adiciona as rotas salvas como opções no select
+      savedRoutes.forEach((savedRoute) => {
+        const option = document.createElement("option");
+        option.value = savedRoute.name;
+        option.text = savedRoute.name;
+        selectRota.appendChild(option);
+      });
+    }
+  }
+}
+
 // Aguarda o evento DOMContentLoaded para garantir que o documento foi completamente carregado
 document.addEventListener("DOMContentLoaded", function() {
-  const formulario = document.querySelector("form");
+  const formulario = document.querySelector(data.commentFormSelector);
   const listaComentarios = document.querySelector(data.commentsListSelector);
+  const selectRota = document.querySelector("#routes");
 
   // Função para exibir um novo comentário
   function exibirComentario(comentario, parentElement) {
@@ -118,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function() {
   formulario.addEventListener("submit", (evento) => {
     evento.preventDefault();
 
-    const comentarioInput = formulario.querySelector("#comment");
+    const comentarioInput = formulario.querySelector(data.commentInputSelector);
     const textoComentario = comentarioInput.value;
 
     if (textoComentario.trim() === "") {
@@ -130,7 +162,8 @@ document.addEventListener("DOMContentLoaded", function() {
       autor: "Usuário",
       data: new Date().toLocaleDateString(),
       texto: textoComentario,
-      curtidas: 0
+      curtidas: 0,
+      rota: selectRota.value // Adicionando a rota selecionada ao comentário
     };
 
     exibirComentario(comentario, listaComentarios);
@@ -146,41 +179,29 @@ document.addEventListener("DOMContentLoaded", function() {
     localStorage.setItem("comentarios", JSON.stringify(comentarios));
   }
 
+  // Função para carregar os comentários do localStorage
+  function carregarComentarios() {
+    let comentarios = localStorage.getItem("comentarios");
+    if (comentarios) {
+      return JSON.parse(comentarios);
+    } else {
+      return [];
+    }
+  }
+
   // Função para remover um comentário do localStorage
   function removerComentario(comentario) {
     let comentarios = carregarComentarios();
-    const indice = comentarios.findIndex(
-      (c) =>
-        c.autor === comentario.autor &&
-        c.data === comentario.data &&
-        c.texto === comentario.texto
-    );
-
-    if (indice !== -1) {
-      comentarios.splice(indice, 1);
-      localStorage.setItem("comentarios", JSON.stringify(comentarios));
-    }
-  }
-  
-  // Função para carregar os comentários salvos no localStorage
-  function carregarComentarios() {
-    const comentariosArmazenados = localStorage.getItem("comentarios");
-
-    if (comentariosArmazenados) {
-      return JSON.parse(comentariosArmazenados);
-    }
-
-    return [];
+    comentarios = comentarios.filter((c) => c !== comentario);
+    localStorage.setItem("comentarios", JSON.stringify(comentarios));
   }
 
-  // Função para exibir os comentários salvos no carregamento da página
-  function exibirComentariosSalvos() {
-    const comentarios = carregarComentarios();
-    comentarios.forEach((comentario) => {
-      exibirComentario(comentario, listaComentarios);
-    });
-  }
+  // Carregar os comentários existentes do localStorage ao carregar a página
+  const comentarios = carregarComentarios();
+  comentarios.forEach((comentario) => {
+    exibirComentario(comentario, listaComentarios);
+  });
 
-  exibirComentariosSalvos();
+  // Exibir as rotas salvas no fórum ao carregar a página
+  exibirRotasSalvasNoForum();
 });
- 

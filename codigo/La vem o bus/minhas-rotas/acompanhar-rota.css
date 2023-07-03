@@ -6,7 +6,7 @@
   }
   
   header .logo img {
-    height: 40px;
+    height: 60px;
     width: auto;
   }
   
@@ -24,7 +24,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #343a40;
+    background-color: #540D6E;
     color: #fff;
   }
   /* Header styles */
@@ -33,7 +33,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #343a40;
+    background-color: #540D6E;
     color: #fff;
   }
   
@@ -53,7 +53,7 @@ header {
   }
   
   header .button-group button {
-    background-color: #007acc;
+    background-color: #3BCEAC;
     color: #fff;
     border: none;
     padding: 10px 15px;
@@ -120,7 +120,7 @@ header {
   
   /* Footer styles */
   footer {
-    background-color: #343a40;
+    background-color: #540D6E;
     color: #fff;
     padding: 10px 0;
     text-align: center;
