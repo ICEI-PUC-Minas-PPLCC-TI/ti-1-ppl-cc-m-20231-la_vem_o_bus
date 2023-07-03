@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    grid-column: 1 / -1;
+    background-color: #540D6E;
+}
+
+header .logo img {
+    height: 80px;
+    width: auto;
+}
+header .botao-voltar {
+    order: 2; /* Posiciona o botão "Voltar ao Menu" à direita */
+}
+
+header .logo {
+    order: 1; /* Posiciona "Minhas Rotas" à esquerda */
+}
+
+header .botao-voltar button {
+    background-color: #3BCEAC; /* Cor de fundo azul */
+    color: #fff; /* Cor do texto branco */
+    border: none; 
+    padding: 10px 15px; /* Espaço interno para o botão */
+    border-radius: 4px; /* Borda arredondada */
+    cursor: pointer; /* Cursor do mouse como ponteiro */
+    transition: background-color 0.3s; /* Transição suave de cores */
+}
+
+header .botao-voltar button:hover {
+    background-color: #005999; /* Cor de fundo azul mais escuro para o efeito de foco */
+}

@@ -27,17 +27,15 @@ header .logo img {
     width: auto;
 }
 
-
-
 .rota-link {
     display: inline-block;
     text-decoration: none;
-    width: 100%; 
+    width: 100%;
     box-sizing: border-box;
 }
 
 .rota-link img {
-    border: none; 
+    border: none;
 }
 
 main {
@@ -60,16 +58,16 @@ main {
 .rotas img {
     width: 80%;
     height: auto;
-    max-height: 200px; 
-    object-fit: cover; 
+    max-height: 200px;
+    object-fit: cover;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
 aside {
     grid-column: 2;
 }
+
 .right-section {
     grid-column: 3;
     display: flex;
@@ -84,9 +82,9 @@ aside {
     background-color: #0EAD69;
     padding: 1rem;
     border-radius: 5px;
-  }
-  
-  .buttons button {
+}
+
+.buttons button {
     padding: 0.5rem;
     font-size: 16px;
     color: white;
@@ -95,28 +93,27 @@ aside {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
-  
-  .buttons button:hover {
+}
+
+.buttons button:hover {
     background-color: white;
     color: #0EAD69;
-  }
-  
-  .buttons button:active {
+}
+
+.buttons button:active {
     background-color: #3BCEAC;
-  }
+}
 
 .forum {
     background-color: #e9ecef;
     padding: 1rem;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%; 
 }
 
 .forum p {
     font-family: 'Roboto', sans-serif;
-    font-size: 30px; 
+    font-size: 30px;
     font-weight: 500;
     color: #343a40;
     margin-bottom: 0.5rem;
@@ -124,7 +121,7 @@ aside {
 
 .forum-box {
     display: inline-block;
-    padding: 70px 25px; 
+    padding: 70px 25px;
     background-color: #f8f9fa;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -134,7 +131,7 @@ aside {
 }
 
 .forum-link {
-    font-size: 40px; 
+    font-size: 40px;
     font-weight: bold;
     color: #0EAD69;
     text-decoration: none;
@@ -143,9 +140,6 @@ aside {
 .forum-link:hover {
     text-decoration: underline;
 }
-
-
-
 
 .meu-busao {
     grid-row: 3;
@@ -157,7 +151,8 @@ aside {
     width: 250px;
 }
 
-.meu-busao h2, .destaques h2 {
+.meu-busao h2,
+.destaques h2 {
     margin-bottom: 1rem;
     color: #343a40;
 }
@@ -185,7 +180,6 @@ aside {
     color: #fff;
 }
 
-
 footer {
     background-color: #540D6E;
     color: #f8f9fa;
@@ -196,10 +190,8 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-  }
-  
-  footer p {
+}
+
+footer p {
     margin: 0;
-  }
-  
-  
+}
